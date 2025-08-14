@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <!-- Left - Logo -->
+  <div class="logo">
+    <a routerLink="/">
+      <img
+        src="https://d2g9wbak88g7ch.cloudfront.net/staticimages/logo-new.png"
+        alt="Bookstore Logo"
+      />
+    </a>
+  </div>
+
+  <!-- Middle - Search Bar -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search by title, author, category, ISBN..."
+    />
+    <button>🔍</button>
+  </div>
+
+  <!-- Right - Profile & Cart -->
+  <div class="right-section">
+    <a [routerLink]="isLoggedIn ? '/profile' : '/login'" class="profile-link">
+      <span class="icon">👤</span>
+      <span>{{ isLoggedIn ? 'John Doe' : 'Login' }}</span>
+    </a>
+
+    <!-- Hide cart if user is admin -->
+    @if (!isAdmin) {
+      <a routerLink="/cart" class="cart-link">
+        🛒
+        @if (cartCount > 0) {
+          <span class="cart-count">{{ cartCount }}</span>
+        }
+      </a>
+    }
+  </div>
+</nav>

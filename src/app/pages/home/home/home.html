@@ -1,0 +1,244 @@
+<div class="page">
+  @if (isAdmin) {
+  <h1 class="page-title topMargin">Admin Dashboard</h1>
+
+  <!-- Book Management -->
+  <section class="section">
+    <h2 class="section-title">Book Management</h2>
+    <div class="btn-row">
+      <button class="btn btn-primary">Add Book</button>
+      <button class="btn btn-success">Import CSV</button>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Book ID</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (book of books; track book.id) {
+        <tr>
+          <td>{{ book.id }}</td>
+          <td>{{ book.title }}</td>
+          <td>₹{{ book.price }}</td>
+          <td>
+            <input
+              #stockInput
+              type="number"
+              class="input stock-input"
+              [value]="10"
+              (blur)="onStockBlur(stockInput.value, stockInput, book)"
+            />
+          </td>
+          <td>
+            <div class="admin-actions">
+              <button class="btn btn-warning" (click)="editBook(book.id)">
+                Edit
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="deleteBook(book.id, book.title)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Users List -->
+  <section class="section">
+    <h2 class="section-title">All Users</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th style="width: 120px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id) {
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td class="text-center">
+            <button
+              class="btn btn-danger"
+              (click)="confirmDeleteUser(user.id, user.name)"
+              [attr.aria-label]="'Delete user ' + user.name"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        } @if (users.length === 0) {
+        <tr>
+          <td colspan="4" class="empty">No users found.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Orders Management -->
+  <section class="section">
+    <h2 class="section-title">Orders</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Book ID</th>
+          <th>User ID</th>
+          <th>Customer</th>
+          <th>Order Date</th>
+          <th>Order Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1001</td>
+          <td>B001</td>
+          <td>U123</td>
+          <td>John Doe</td>
+          <td>2025-08-10</td>
+          <td>15:45</td>
+          <td>
+            <select class="select">
+              <option>On the way</option>
+              <option>Delivered</option>
+              <option>Pending</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>#1002</td>
+          <td>B002</td>
+          <td>U456</td>
+          <td>Jane Smith</td>
+          <td>2025-08-11</td>
+          <td>10:20</td>
+          <td>
+            <select class="select">
+              <option>On the way</option>
+              <option>Delivered</option>
+              <option>Pending</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <app-manage-admins></app-manage-admins>
+
+  } @else {
+  <!-- USER VIEW -->
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Discover Your Next Favorite Book</h1>
+      <p>Browse through our curated collection and find books you'll love.</p>
+      <a class="btn btn-primary" [routerLink]="'/books/all'">
+        Browse All Books
+      </a>
+    </div>
+  </section>
+
+  <!-- All Books -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">All Books</h2>
+      <a class="link" [routerLink]="'/books/all'">See All</a>
+    </div>
+    <div class="grid-books">
+      @for (book of (books | slice:0:4); track book.id) {
+      <div class="book-card">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="info">
+          <div class="title">{{ book.title }}</div>
+          <div class="author">{{ book.author }}</div>
+          <div class="meta">
+            <span class="price">₹{{ book.price }}</span>
+            <span class="rating">★ {{ book.rating }}</span>
+          </div>
+          <div>
+            <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- Recommended Books -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Recommended Books</h2>
+      <a class="link" [routerLink]="'/books/recommended'">See All</a>
+    </div>
+    <div class="grid-books">
+      @for (book of (books | slice:0:4); track book.id) {
+      <div class="book-card">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="info">
+          <div class="title">{{ book.title }}</div>
+          <div class="author">{{ book.author }}</div>
+          <div class="meta">
+            <span class="price">₹{{ book.price }}</span>
+            <span class="rating">★ {{ book.rating }}</span>
+          </div>
+           <div>
+            <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- Trending Books -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Trending Books</h2>
+      <a class="link" [routerLink]="'/books/trending'">See All</a>
+    </div>
+    <div class="grid-books">
+      @for (book of (books | slice:2:6); track book.id) {
+      <div class="book-card">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="info">
+          <div class="title">{{ book.title }}</div>
+          <div class="author">{{ book.author }}</div>
+          <div class="meta">
+            <span class="price">₹{{ book.price }}</span>
+            <span class="rating">★ {{ book.rating }}</span>
+          </div>
+           <div>
+            <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+  }
+</div>

@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  isLoggedIn = true; // Replace with AuthService later
+  isLoggedIn = false; // Replace with AuthService later
   cartCount = 1;     // Replace with CartService later
   isAdmin = true;    // Replace with actual role check later
 }

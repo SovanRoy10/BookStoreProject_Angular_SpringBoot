@@ -237,4 +237,34 @@ export class Home {
       Swal.fire('Deleted!', 'User has been deleted.', 'success');
     }
   }
+
+  // bulk upload api
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const file = input.files[0];
+
+    // Confirm before upload
+    this.confirmAction(
+      'Bulk Upload Books?',
+      `You are about to upload: ${file.name}. Continue?`,
+      'Yes, upload!',
+      () => {
+        this.bookService.bulkUploadBooks(file).subscribe({
+          next: (response) => {
+            console.log('Bulk Upload Response:', response); // <-- See backend response
+            Swal.fire('Success!', 'Books uploaded successfully.', 'success');
+            this.loadBooks(); // Refresh list
+          },
+          error: (error) => {
+            console.error('Bulk Upload Error:', error); // <-- Log full error
+            Swal.fire('Error!', 'Failed to upload books.', 'error');
+          },
+        });
+      }
+    );
+  }
 }

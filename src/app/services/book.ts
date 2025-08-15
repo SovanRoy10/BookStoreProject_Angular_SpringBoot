@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
   private apiUrl = 'https://api.example.com/books'; // change to your API
@@ -43,5 +43,12 @@ export class BookService {
   // DELETE book by ID
   deleteBook(id: number | string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  // book.service.ts
+  bulkUploadBooks(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file); // 'file' is the key expected by your backend
+    return this.http.post(`${this.apiUrl}/bulk-upload`, formData);
   }
 }

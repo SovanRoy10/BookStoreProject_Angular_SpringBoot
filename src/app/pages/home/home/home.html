@@ -7,7 +7,17 @@
     <h2 class="section-title">Book Management</h2>
     <div class="btn-row">
       <button class="btn btn-primary" (click)="addBook()">Add Book</button>
-      <button class="btn btn-success">Import CSV</button>
+      <!-- home.html -->
+      <button class="btn btn-success" (click)="fileInput.click()">
+        Import CSV
+      </button>
+      <input
+        type="file"
+        accept=".csv"
+        #fileInput
+        style="display: none"
+        (change)="onFileSelected($event)"
+      />
     </div>
 
     <table class="table">
@@ -202,7 +212,7 @@
             <span class="price">₹{{ book.price }}</span>
             <span class="rating">★ {{ book.rating }}</span>
           </div>
-           <div>
+          <div>
             <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
               View Details
             </a>
@@ -230,7 +240,7 @@
             <span class="price">₹{{ book.price }}</span>
             <span class="rating">★ {{ book.rating }}</span>
           </div>
-           <div>
+          <div>
             <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
               View Details
             </a>

@@ -250,12 +250,12 @@
   font-size: 0.9rem;
 }
 
-.book-card .meta {
+/* .book-card .meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 0.25rem;
-}
+} */
 
 .price {
   font-weight: 800;

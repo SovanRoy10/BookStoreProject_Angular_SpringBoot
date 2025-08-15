@@ -7,6 +7,19 @@ import { CommonModule } from '@angular/common';
 import { ManageAdminsComponent } from '../../../shared/manage-admins/manage-admins';
 import { BookService } from '../../../services/book';
 
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  price: number;
+  isbn: string;
+  publishDate: string;
+  categoryName: string;
+  stockQuantity: number;
+  description: string;
+  coverImageUrl: string;
+}
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterModule, ManageAdminsComponent],
@@ -30,104 +43,105 @@ export class Home {
   }
   isAdmin = false; // toggle for admin/user view
 
-  books = [
-    {
-      id: 1,
-      title: 'The Silent Patient',
-      author: 'Alex Michaelides',
-      price: 499,
-      image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      title: 'Atomic Habits',
-      author: 'James Clear',
-      price: 599,
-      image: 'https://m.media-amazon.com/images/I/91bYsX41DVL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 3,
-      title: 'Ikigai',
-      author: 'Héctor García',
-      price: 350,
-      image: 'https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 4,
-      title: 'Think Like a Monk',
-      author: 'Jay Shetty',
-      price: 450,
-      image: 'https://m.media-amazon.com/images/I/71g2ednj0JL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 5,
-      title: 'The Alchemist',
-      author: 'Paulo Coelho',
-      price: 299,
-      image: 'https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 6,
-      title: 'Deep Work',
-      author: 'Cal Newport',
-      price: 550,
-      image: 'https://m.media-amazon.com/images/I/81gTwYAhU7L.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 7,
-      title: 'Rich Dad Poor Dad',
-      author: 'Robert Kiyosaki',
-      price: 399,
-      image: 'https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 8,
-      title: 'The Psychology of Money',
-      author: 'Morgan Housel',
-      price: 420,
-      image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 9,
-      title: 'Sapiens',
-      author: 'Yuval Noah Harari',
-      price: 650,
-      image: 'https://m.media-amazon.com/images/I/713jIoMO3UL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 10,
-      title: 'Educated',
-      author: 'Tara Westover',
-      price: 499,
-      image: 'https://m.media-amazon.com/images/I/81WojUxbbFL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 11,
-      title: 'Becoming',
-      author: 'Michelle Obama',
-      price: 599,
-      image: 'https://m.media-amazon.com/images/I/81h2gWPTYJL.jpg',
-      rating: 4.5,
-    },
-    {
-      id: 12,
-      title: 'The Power of Habit',
-      author: 'Charles Duhigg',
-      price: 450,
-      image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
-      rating: 4.5,
-    },
-  ];
+  books: Book[] = [];
+  // books = [
+  //   {
+  //     id: 1,
+  //     title: 'The Silent Patient',
+  //     author: 'Alex Michaelides',
+  //     price: 499,
+  //     image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Atomic Habits',
+  //     author: 'James Clear',
+  //     price: 599,
+  //     image: 'https://m.media-amazon.com/images/I/91bYsX41DVL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Ikigai',
+  //     author: 'Héctor García',
+  //     price: 350,
+  //     image: 'https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Think Like a Monk',
+  //     author: 'Jay Shetty',
+  //     price: 450,
+  //     image: 'https://m.media-amazon.com/images/I/71g2ednj0JL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 5,
+  //     title: 'The Alchemist',
+  //     author: 'Paulo Coelho',
+  //     price: 299,
+  //     image: 'https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 6,
+  //     title: 'Deep Work',
+  //     author: 'Cal Newport',
+  //     price: 550,
+  //     image: 'https://m.media-amazon.com/images/I/81gTwYAhU7L.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 7,
+  //     title: 'Rich Dad Poor Dad',
+  //     author: 'Robert Kiyosaki',
+  //     price: 399,
+  //     image: 'https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 8,
+  //     title: 'The Psychology of Money',
+  //     author: 'Morgan Housel',
+  //     price: 420,
+  //     image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 9,
+  //     title: 'Sapiens',
+  //     author: 'Yuval Noah Harari',
+  //     price: 650,
+  //     image: 'https://m.media-amazon.com/images/I/713jIoMO3UL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 10,
+  //     title: 'Educated',
+  //     author: 'Tara Westover',
+  //     price: 499,
+  //     image: 'https://m.media-amazon.com/images/I/81WojUxbbFL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 11,
+  //     title: 'Becoming',
+  //     author: 'Michelle Obama',
+  //     price: 599,
+  //     image: 'https://m.media-amazon.com/images/I/81h2gWPTYJL.jpg',
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     id: 12,
+  //     title: 'The Power of Habit',
+  //     author: 'Charles Duhigg',
+  //     price: 450,
+  //     image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UY218_.jpg',
+  //     rating: 4.5,
+  //   },
+  // ];
 
   users = [
     { id: 'U001', name: 'John Doe', email: 'john@example.com' },
@@ -181,6 +195,7 @@ export class Home {
       }
     );
   }
+  loading = false;
 
   // get all books api
   loadBooks() {
@@ -269,10 +284,21 @@ export class Home {
       }
     );
   }
-  
 
   // search api call
   ngOnInit() {
+    // Fetch books from API when home page loads
+    this.loading = true;
+    this.bookService.getAllBooks().subscribe({
+      next: (data) => {
+        this.books = data.slice(0, 4);
+        this.loading = false;
+      },
+      error: () => {
+        Swal.fire('Error!', 'Failed to fetch books.', 'error');
+        this.loading = false;
+      },
+    });
 
     // this.searchResults = [
     //   {
@@ -301,6 +327,8 @@ export class Home {
     this.bookService.searchEvent$.subscribe((event) => {
       if (!event) return;
 
+      this.loading = true; // <-- START loading before making the API call
+
       let apiCall;
       switch (event.type) {
         case 'title':
@@ -316,10 +344,17 @@ export class Home {
 
       if (apiCall) {
         apiCall.subscribe({
-          next: (data) => (this.searchResults = data),
-          error: () =>
-            Swal.fire('Error!', 'Failed to fetch search results.', 'error'),
+          next: (data) => {
+            this.searchResults = data;
+            this.loading = false; // <-- STOP loading when data arrives
+          },
+          error: () => {
+            Swal.fire('Error!', 'Failed to fetch search results.', 'error');
+            this.loading = false;
+          },
         });
+      } else {
+        this.loading = false;
       }
     });
   }

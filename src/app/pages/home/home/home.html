@@ -1,23 +1,20 @@
 <div class="page">
-
   <!-- Search results (only if there are any) -->
-   @if (searchResults.length > 0) {
-    <div class="search-results">
-      <h3>Search Results</h3>
-      <div class="book-grid">
-        @for (book of searchResults; track book.id) {
-          <div class="book-card">
-            <img [src]="book.image" alt="{{ book.title }}" />
-            <h4>{{ book.title }}</h4>
-            <p>{{ book.author }}</p>
-            <p>₹{{ book.price }}</p>
-          </div>
-        }
+  @if (searchResults.length > 0) {
+  <div class="search-results">
+    <h3>Search Results</h3>
+    <div class="book-grid">
+      @for (book of searchResults; track book.id) {
+      <div class="book-card">
+        <img [src]="book.image" alt="{{ book.title }}" />
+        <h4>{{ book.title }}</h4>
+        <p>{{ book.author }}</p>
+        <p>₹{{ book.price }}</p>
       </div>
+      }
     </div>
-  }
-
-  @if (isAdmin) {
+  </div>
+  } @if (isAdmin) {
   <h1 class="page-title topMargin">Admin Dashboard</h1>
 
   <!-- Book Management -->
@@ -60,7 +57,6 @@
               type="number"
               class="input stock-input"
               [value]="10"
-              (blur)="onStockBlur(stockInput.value, stockInput, book)"
             />
           </td>
           <td>
@@ -194,13 +190,20 @@
     <div class="grid-books">
       @for (book of (books | slice:0:4); track book.id) {
       <div class="book-card">
-        <img [src]="book.image" [alt]="book.title" />
+        <img [src]="book.coverImageUrl" [alt]="book.title" />
         <div class="info">
-          <div class="title">{{ book.title }}</div>
+          <div class="title">
+            {{
+              book.title.length > 19
+                ? (book.title | slice : 0 : 19) + "..."
+                : book.title
+            }}
+          </div>
+
           <div class="author">{{ book.author }}</div>
           <div class="meta">
             <span class="price">₹{{ book.price }}</span>
-            <span class="rating">★ {{ book.rating }}</span>
+            <!-- <span class="rating">★ {{ book.rating }}</span> -->
           </div>
           <div>
             <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
@@ -209,7 +212,7 @@
           </div>
         </div>
       </div>
-      }
+      }`
     </div>
   </section>
 
@@ -222,13 +225,19 @@
     <div class="grid-books">
       @for (book of (books | slice:0:4); track book.id) {
       <div class="book-card">
-        <img [src]="book.image" [alt]="book.title" />
+        <img [src]="book.coverImageUrl" [alt]="book.title" />
         <div class="info">
-          <div class="title">{{ book.title }}</div>
+           <div class="title">
+            {{
+              book.title.length > 19
+                ? (book.title | slice : 0 : 19) + "..."
+                : book.title
+            }}
+          </div>
           <div class="author">{{ book.author }}</div>
           <div class="meta">
             <span class="price">₹{{ book.price }}</span>
-            <span class="rating">★ {{ book.rating }}</span>
+            <!-- <span class="rating">★ {{ book.rating }}</span> -->
           </div>
           <div>
             <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
@@ -248,15 +257,21 @@
       <a class="link" [routerLink]="'/books/trending'">See All</a>
     </div>
     <div class="grid-books">
-      @for (book of (books | slice:2:6); track book.id) {
+      @for (book of (books | slice:0:4); track book.id) {
       <div class="book-card">
-        <img [src]="book.image" [alt]="book.title" />
+        <img [src]="book.coverImageUrl" [alt]="book.title" />
         <div class="info">
-          <div class="title">{{ book.title }}</div>
+           <div class="title">
+            {{
+              book.title.length > 19
+                ? (book.title | slice : 0 : 19) + "..."
+                : book.title
+            }}
+          </div>
           <div class="author">{{ book.author }}</div>
           <div class="meta">
             <span class="price">₹{{ book.price }}</span>
-            <span class="rating">★ {{ book.rating }}</span>
+            <!-- <span class="rating">★ {{ book.rating }}</span> -->
           </div>
           <div>
             <a class="btnSmall btn-primary" [routerLink]="['/book', book.id]">
@@ -270,3 +285,7 @@
   </section>
   }
 </div>
+
+<div *ngIf="loading" class="loader-container">
+    <span class="loader"></span>
+  </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { BookService } from '../../../services/book';
 
 interface Book {
   id: string;
@@ -25,32 +26,32 @@ interface Book {
 })
 export class EditBooks implements OnInit {
   book: Book | null = null;
+  id: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private bookService: BookService
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') || '';
+    this.id = this.route.snapshot.paramMap.get('id') || '';
 
-    // Simulate API fetch
-    setTimeout(() => {
-      this.book = {
-        id,
-        title: 'The Great Gatsby',
-        author: 'F. Scott Fitzgerald',
-        price: 299,
-        isbn: '9780743273565',
-        publishDate: '1925-04-10',
-        category: 'Classic Literature',
-        description: 'A novel set in the Roaring Twenties...',
-        image: 'https://www.bookswagon.com/productimages/images200/862/9780190635862.jpg'
-      };
-    }, 300);
+    if (this.id) { // get book by id api call
+      this.bookService.getBookById(this.id).subscribe({
+        next: (data) => {
+          this.book = data;
+        },
+        error: () => {
+          Swal.fire('Error', 'Failed to fetch book details.', 'error');
+        }
+      });
+    }
   }
 
   handleSave(): void {
+    if (!this.book) return;
+
     Swal.fire({
       title: 'Save Changes?',
       text: 'This will update the book details permanently.',
@@ -59,16 +60,22 @@ export class EditBooks implements OnInit {
       confirmButtonColor: '#2563eb',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, save it!'
-    }).then(result => {
-      if (result.isConfirmed && this.book) {
-        console.log('Updated book:', this.book);
-        Swal.fire('Updated!', 'Book details have been saved.', 'success');
-        this.router.navigate(['/admin']);
+    }).then((result) => {
+      if (result.isConfirmed) { // update book api call
+        this.bookService.updateBook(this.id, this.book).subscribe({
+          next: () => {
+            Swal.fire('Updated!', 'Book details have been saved.', 'success');
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            Swal.fire('Error', 'Failed to update book.', 'error');
+          }
+        });
       }
     });
   }
 
   handleCancel(): void {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/']);
   }
 }

@@ -71,7 +71,7 @@ export class AddBook implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, save it!',
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed) { // add book api call
         this.bookService.addBook(this.book).subscribe({
           next: () => {
             Swal.fire('Added!', 'The new book has been saved.', 'success');

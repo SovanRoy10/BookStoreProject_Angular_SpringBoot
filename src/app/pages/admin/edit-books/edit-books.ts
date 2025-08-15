@@ -12,9 +12,9 @@ interface Book {
   price: number;
   isbn: string;
   publishDate: string;
-  category: string;
+  categoryName: string;
   description: string;
-  image: string;
+  coverImageUrl: string;
 }
 
 @Component({
@@ -58,9 +58,9 @@ export class EditBooks implements OnInit {
       this.book.price > 0 &&
       this.book.isbn.trim() !== '' &&
       this.book.publishDate.trim() !== '' &&
-      this.book.category.trim() !== '' &&
+      this.book.categoryName.trim() !== '' &&
       this.book.description.trim() !== '' &&
-      this.book.image.trim() !== ''
+      this.book.coverImageUrl.trim() !== ''
     );
   }
 

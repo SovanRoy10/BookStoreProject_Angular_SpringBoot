@@ -6,8 +6,12 @@
     <div class="book-grid">
       @for (book of searchResults; track book.id) {
       <div class="book-card">
-        <img [src]="book.image" alt="{{ book.title }}" />
-        <h4>{{ book.title }}</h4>
+        <img [src]="book.coverImageUrl" alt="{{ book.title }}" />
+        <h4>{{
+              book.title.length > 16
+                ? (book.title | slice : 0 : 16) + "..."
+                : book.title
+            }}</h4>
         <p>{{ book.author }}</p>
         <p>₹{{ book.price }}</p>
       </div>

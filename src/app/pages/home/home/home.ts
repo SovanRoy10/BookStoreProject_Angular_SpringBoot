@@ -199,12 +199,16 @@ export class Home {
 
   // get all books api
   loadBooks() {
+    this.loading = true;
     this.bookService.getAllBooks().subscribe({
       next: (data) => {
         this.books = data;
+        this.loading = false;
+        
       },
       error: () => {
         Swal.fire('Error!', 'Failed to fetch books.', 'error');
+        this.loading = false;
       },
     });
   }
@@ -287,11 +291,13 @@ export class Home {
 
   // search api call
   ngOnInit() {
+    this.loadBooks();
     // Fetch books from API when home page loads
     this.loading = true;
     this.bookService.getAllBooks().subscribe({
       next: (data) => {
-        this.books = data.slice(0, 4);
+        if (!this.isAdmin) this.books = data.slice(0, 4);
+        else this.books = data;
         this.loading = false;
       },
       error: () => {
@@ -299,30 +305,6 @@ export class Home {
         this.loading = false;
       },
     });
-
-    // this.searchResults = [
-    //   {
-    //     id: 1,
-    //     title: 'The Great Gatsby',
-    //     author: 'F. Scott Fitzgerald',
-    //     price: 299,
-    //     image: 'https://via.placeholder.com/150x220?text=The+Great+Gatsby'
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'To Kill a Mockingbird',
-    //     author: 'Harper Lee',
-    //     price: 350,
-    //     image: 'https://via.placeholder.com/150x220?text=To+Kill+a+Mockingbird'
-    //   },
-    //   {
-    //     id: 3,
-    //     title: '1984',
-    //     author: 'George Orwell',
-    //     price: 250,
-    //     image: 'https://via.placeholder.com/150x220?text=1984'
-    //   }
-    // ];
 
     this.bookService.searchEvent$.subscribe((event) => {
       if (!event) return;

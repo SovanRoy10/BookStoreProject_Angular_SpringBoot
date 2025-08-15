@@ -29,7 +29,8 @@ export class BookService {
 
   // GET book by ID
   getBookById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    // return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`https://dummyjson.com/c/68b8-5823-45c1-bfae`);
   }
 
   // GET recommended books
@@ -44,17 +45,20 @@ export class BookService {
 
   // PUT update book
   updateBook(id: string, bookData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, bookData);
+    // return this.http.put(`${this.apiUrl}/${id}`, bookData);
+    return this.http.put(`https://dummyjson.com/c/d8ac-a228-4481-b4a7`, bookData);
   }
 
   // POST add a new book
   addBook(bookData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, bookData);
+    // return this.http.post(`${this.apiUrl}`, bookData);
+    return this.http.post(`https://dummyjson.com/c/99fe-ac11-4a5d-a462`, bookData);
   }
 
   // DELETE book by ID
   deleteBook(id: number | string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    // return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`https://dummyjson.com/c/dad4-58b5-4339-ae33`);
   }
 
   // BULK upload
@@ -67,19 +71,22 @@ export class BookService {
   // SEARCH methods
   searchBooksByTitle(title: string): Observable<any> {
     return this.http.get(
-      `${this.apiUrl}/search?title=${encodeURIComponent(title)}`
+      // `${this.apiUrl}/search?title=${encodeURIComponent(title)}`
+      `https://dummyjson.com/c/ee13-926c-484d-8fa9`
     );
   }
 
   searchBooksByAuthor(author: string): Observable<any> {
     return this.http.get(
-      `${this.apiUrl}/search?author=${encodeURIComponent(author)}`
+      // `${this.apiUrl}/search?author=${encodeURIComponent(author)}`
+      `https://dummyjson.com/c/ee13-926c-484d-8fa9`
     );
   }
 
   searchBooksByIsbn(isbn: string): Observable<any> {
     return this.http.get(
-      `${this.apiUrl}/search?isbn=${encodeURIComponent(isbn)}`
+      // `${this.apiUrl}/search?isbn=${encodeURIComponent(isbn)}`
+      `https://dummyjson.com/c/ee13-926c-484d-8fa9`
     );
   }
 
@@ -90,14 +97,14 @@ export class BookService {
   }
 }
 
-// /api/books/search?title=book_name: ✅
+// /api/books/search?title=book_name: 
 // /api/categories/get-all : ✅
-// /api/categories/get/name/category
-// /api/books/search?category=category_name
-// /search?sortBy=price&sortDir=asc
-// /search?sortBy=publishDate&sortDir=desc
-// /search?minPrice=price&maxPrice=asc
-// /api/books/search?available=true
+// /api/categories/get/name/category  ✅
+// /api/books/search?category=category_name  ✅
+// /search?sortBy=price&sortDir=asc  ✅
+// /search?sortBy=publishDate&sortDir=desc  ✅
+// /search?minPrice=price&maxPrice=asc  ✅
+// /api/books/search?available=true   ✅
 
 // placed,shift,cancelled,delivered,return
 

@@ -29,7 +29,7 @@
 
     <div class="form-group">
       <label>Category</label>
-      <input type="text" [(ngModel)]="book.category" placeholder="Category" />
+      <input type="text" [(ngModel)]="book.categoryName" placeholder="Category" />
     </div>
 
     <div class="form-group">
@@ -42,11 +42,11 @@
 
     <div class="form-group">
       <label>Image URL</label>
-      <input type="text" [(ngModel)]="book.image" placeholder="Image URL" />
+      <input type="text" [(ngModel)]="book.coverImageUrl" placeholder="Image URL" />
     </div>
 
     <div class="image-preview">
-      <img [src]="book.image" alt="Book Cover" />
+      <img [src]="book.coverImageUrl" alt="Book Cover" />
     </div>
 
     <div class="button-group">

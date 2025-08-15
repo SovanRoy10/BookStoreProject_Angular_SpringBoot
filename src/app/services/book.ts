@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,15 @@ import { Observable } from 'rxjs';
 export class BookService {
   private apiUrl = 'https://api.example.com/books'; // change to your API
 
+  // BehaviorSubject to store search request
+  private searchEventSource = new BehaviorSubject<{ type: string; query: string } | null>(null);
+  searchEvent$ = this.searchEventSource.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  triggerSearch(type: string, query: string) {
+    this.searchEventSource.next({ type, query });
+  }
 
   // GET all books
   getAllBooks(): Observable<any> {
@@ -45,10 +53,39 @@ export class BookService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // book.service.ts
+  // BULK upload
   bulkUploadBooks(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file); // 'file' is the key expected by your backend
+    formData.append('file', file);
     return this.http.post(`${this.apiUrl}/bulk-upload`, formData);
   }
+
+  // SEARCH methods
+  searchBooksByTitle(title: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search?title=${encodeURIComponent(title)}`);
+  }
+
+  searchBooksByAuthor(author: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search?author=${encodeURIComponent(author)}`);
+  }
+
+  searchBooksByIsbn(isbn: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search?isbn=${encodeURIComponent(isbn)}`);
+  }
 }
+
+
+// /api/books/search?title=book_name
+// /api/books/search?category=category_name
+// /search?sortBy=price&sortDir=asc
+// /search?minPrice=price&maxPrice=asc
+// /api/books/search?available=true
+
+// placed,shift,cancelled,delivered,return
+
+// order id same , multiple product
+
+// return orders list in admin section
+
+// make changes in order history table in profile, after clicking the order id , another page open consisting that orders
+// where I have the return option

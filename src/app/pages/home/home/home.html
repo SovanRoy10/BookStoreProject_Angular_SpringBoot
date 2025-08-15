@@ -1,4 +1,22 @@
 <div class="page">
+
+  <!-- Search results (only if there are any) -->
+   @if (searchResults.length > 0) {
+    <div class="search-results">
+      <h3>Search Results</h3>
+      <div class="book-grid">
+        @for (book of searchResults; track book.id) {
+          <div class="book-card">
+            <img [src]="book.image" alt="{{ book.title }}" />
+            <h4>{{ book.title }}</h4>
+            <p>{{ book.author }}</p>
+            <p>₹{{ book.price }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
   @if (isAdmin) {
   <h1 class="page-title topMargin">Admin Dashboard</h1>
 

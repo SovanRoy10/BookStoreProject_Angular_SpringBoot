@@ -28,7 +28,7 @@ export class Home {
   ) {
     throw new Error('Method not implemented.');
   }
-  isAdmin = true; // toggle for admin/user view
+  isAdmin = false; // toggle for admin/user view
 
   books = [
     {
@@ -133,6 +133,8 @@ export class Home {
     { id: 'U001', name: 'John Doe', email: 'john@example.com' },
     { id: 'U002', name: 'Jane Smith', email: 'jane@example.com' },
   ];
+
+  searchResults: any[] = [];
 
   constructor(private router: Router, private bookService: BookService) {}
 
@@ -266,5 +268,59 @@ export class Home {
         });
       }
     );
+  }
+  
+
+  // search api call
+  ngOnInit() {
+
+    // this.searchResults = [
+    //   {
+    //     id: 1,
+    //     title: 'The Great Gatsby',
+    //     author: 'F. Scott Fitzgerald',
+    //     price: 299,
+    //     image: 'https://via.placeholder.com/150x220?text=The+Great+Gatsby'
+    //   },
+    //   {
+    //     id: 2,
+    //     title: 'To Kill a Mockingbird',
+    //     author: 'Harper Lee',
+    //     price: 350,
+    //     image: 'https://via.placeholder.com/150x220?text=To+Kill+a+Mockingbird'
+    //   },
+    //   {
+    //     id: 3,
+    //     title: '1984',
+    //     author: 'George Orwell',
+    //     price: 250,
+    //     image: 'https://via.placeholder.com/150x220?text=1984'
+    //   }
+    // ];
+
+    this.bookService.searchEvent$.subscribe((event) => {
+      if (!event) return;
+
+      let apiCall;
+      switch (event.type) {
+        case 'title':
+          apiCall = this.bookService.searchBooksByTitle(event.query);
+          break;
+        case 'author':
+          apiCall = this.bookService.searchBooksByAuthor(event.query);
+          break;
+        case 'isbn':
+          apiCall = this.bookService.searchBooksByIsbn(event.query);
+          break;
+      }
+
+      if (apiCall) {
+        apiCall.subscribe({
+          next: (data) => (this.searchResults = data),
+          error: () =>
+            Swal.fire('Error!', 'Failed to fetch search results.', 'error'),
+        });
+      }
+    });
   }
 }

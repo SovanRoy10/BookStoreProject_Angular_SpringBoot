@@ -14,7 +14,7 @@ import { BookService } from '../../services/book';
 export class Navbar {
   isLoggedIn = true; // Replace with AuthService later
   cartCount = 1; // Replace with CartService later
-  isAdmin = true; // Replace with actual role check later
+  isAdmin = false; // Replace with actual role check later
 
 
   searchType = 'title';

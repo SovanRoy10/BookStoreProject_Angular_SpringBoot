@@ -41,11 +41,14 @@ export class BookDetail implements OnInit {
       isbn: '9780743273565',
       publishDate: '1925-04-10',
       category: 'Classic Literature',
+      // categoryName
       stock: 12,
+      // stockQuanity
       description:
         'A novel set in the Roaring Twenties, telling the story of Jay Gatsby and his unrequited love for Daisy Buchanan.',
       image:
         'https://www.bookswagon.com/productimages/images200/862/9780190635862.jpg'
+        // coverImageUrl
     };
 
     // Simulated reviews

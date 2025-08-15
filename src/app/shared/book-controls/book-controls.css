@@ -19,8 +19,8 @@
 
 .sorting {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-center;
+  gap: 0.8rem;
 }
 
 h2 {
@@ -29,7 +29,7 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-select {
+select,input {
   padding: 0.45rem 0.8rem;
   font-size: 0.9rem;
   border: 1px solid #ccc;
@@ -37,6 +37,10 @@ select {
   outline: none;
   background-color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input{
+  max-width: 52px;
 }
 
 select:focus {

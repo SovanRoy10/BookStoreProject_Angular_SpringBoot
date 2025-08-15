@@ -9,7 +9,10 @@ export class BookService {
   private apiUrl = 'https://api.example.com/books'; // change to your API
 
   // BehaviorSubject to store search request
-  private searchEventSource = new BehaviorSubject<{ type: string; query: string } | null>(null);
+  private searchEventSource = new BehaviorSubject<{
+    type: string;
+    query: string;
+  } | null>(null);
   searchEvent$ = this.searchEventSource.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -20,7 +23,8 @@ export class BookService {
 
   // GET all books
   getAllBooks(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+    // return this.http.get(`${this.apiUrl}/categories/get-all`);
+    return this.http.get(`https://dummyjson.com/c/05eb-5a96-415c-81ed`);
   }
 
   // GET book by ID
@@ -62,22 +66,36 @@ export class BookService {
 
   // SEARCH methods
   searchBooksByTitle(title: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?title=${encodeURIComponent(title)}`);
+    return this.http.get(
+      `${this.apiUrl}/search?title=${encodeURIComponent(title)}`
+    );
   }
 
   searchBooksByAuthor(author: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?author=${encodeURIComponent(author)}`);
+    return this.http.get(
+      `${this.apiUrl}/search?author=${encodeURIComponent(author)}`
+    );
   }
 
   searchBooksByIsbn(isbn: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?isbn=${encodeURIComponent(isbn)}`);
+    return this.http.get(
+      `${this.apiUrl}/search?isbn=${encodeURIComponent(isbn)}`
+    );
+  }
+
+  // GET all categories
+  getAllCategories(): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/get-all-categories`);
+    return this.http.get(`https://dummyjson.com/c/eff1-4df4-47b8-9f10`);
   }
 }
 
-
-// /api/books/search?title=book_name
+// /api/books/search?title=book_name: ✅
+// /api/categories/get-all : ✅
+// /api/categories/get/name/category
 // /api/books/search?category=category_name
 // /search?sortBy=price&sortDir=asc
+// /search?sortBy=publishDate&sortDir=desc
 // /search?minPrice=price&maxPrice=asc
 // /api/books/search?available=true
 

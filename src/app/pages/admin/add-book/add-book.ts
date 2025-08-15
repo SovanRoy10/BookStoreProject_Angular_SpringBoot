@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { BookService } from '../../../services/book';
 
@@ -61,7 +61,7 @@ export class AddBook implements OnInit {
       Swal.fire('Error', 'Please fill in all fields before saving.', 'error');
       return;
     }
-    
+
     Swal.fire({
       title: 'Save Changes?',
       text: 'This will update the book details permanently.',

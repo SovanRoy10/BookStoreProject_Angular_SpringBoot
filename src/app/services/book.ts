@@ -39,4 +39,9 @@ export class BookService {
   addBook(bookData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, bookData);
   }
+
+  // DELETE book by ID
+  deleteBook(id: number | string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

@@ -49,8 +49,26 @@ export class EditBooks implements OnInit {
     }
   }
 
+
+  isFormValid(): boolean {
+    if (!this.book) return false;
+    return (
+      this.book.title.trim() !== '' &&
+      this.book.author.trim() !== '' &&
+      this.book.price > 0 &&
+      this.book.isbn.trim() !== '' &&
+      this.book.publishDate.trim() !== '' &&
+      this.book.category.trim() !== '' &&
+      this.book.description.trim() !== '' &&
+      this.book.image.trim() !== ''
+    );
+  }
+
   handleSave(): void {
-    if (!this.book) return;
+    if (!this.isFormValid()) {
+      Swal.fire('Validation Error', 'Please fill in all fields correctly.', 'warning');
+      return;
+    }
 
     Swal.fire({
       title: 'Save Changes?',

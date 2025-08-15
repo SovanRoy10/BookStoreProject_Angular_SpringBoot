@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ManageAdminsComponent } from '../../../shared/manage-admins/manage-admins';
+import { BookService } from '../../../services/book';
 
 @Component({
   selector: 'app-home',
@@ -133,7 +134,7 @@ export class Home {
     { id: 'U002', name: 'Jane Smith', email: 'jane@example.com' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private bookService: BookService) {}
 
   private async confirmAction(
     title: string,
@@ -179,21 +180,39 @@ export class Home {
     );
   }
 
+  // get all books api
+  loadBooks() {
+    this.bookService.getAllBooks().subscribe({
+      next: (data) => {
+        this.books = data;
+      },
+      error: () => {
+        Swal.fire('Error!', 'Failed to fetch books.', 'error');
+      },
+    });
+  }
+
+  // delete book by id api
   deleteBook(bookId: number, bookTitle: string) {
     this.confirmAction(
       'Delete Book?',
       `Are you sure you want to delete "${bookTitle}"? This action cannot be undone.`,
       'Yes, delete it!',
       () => {
-        axios
-          .post(`/api/books/${bookId}/delete`)
-          .then(() =>
-            Swal.fire('Deleted!', 'The book has been deleted.', 'success')
-          )
-          .catch(() => Swal.fire('Error!', 'Failed to delete book.', 'error'));
+        this.bookService.deleteBook(bookId).subscribe({
+          next: (response) => {
+            Swal.fire('Deleted!', 'The book has been deleted.', 'success');
+            this.loadBooks(); // Refresh book list after deletion
+          },
+          error: (error) => {
+            console.error('Delete API Error:', error); // <-- Log error details
+            Swal.fire('Error!', 'Failed to delete book.', 'error');
+          },
+        });
       }
     );
   }
+
   addBook() {
     this.router.navigate([`/admin/add-book`]);
   }

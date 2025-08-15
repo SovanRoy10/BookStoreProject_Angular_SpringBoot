@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 98%;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 50;
@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-.logo img {
+ .logo img {
   height: 40px;
 }
 
@@ -88,7 +88,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.15s ease-in-out, background 0.3s ease;
-}
+} 
 
 .cart-count:hover {
   transform: scale(1.15);

@@ -21,15 +21,17 @@ export interface Book {
   imports: [BookControls, CommonModule],
   selector: 'app-all-books',
   templateUrl: './all-books.html',
-  styleUrl: './all-books.css'
+  styleUrl: './all-books.css',
 })
 export class AllBooks implements OnInit {
+  loading = false;
+
   books: Book[] = [];
   originalBooks: Book[] = [];
   filters = {
     category: '',
     priceRange: [0, 1000],
-    availability: ''
+    availability: '',
   };
   sortOption = '';
 
@@ -41,15 +43,19 @@ export class AllBooks implements OnInit {
   }
 
   loadBooks() {
+    this.loading = true; // Show loader before API call
+
     this.bookService.getAllBooks().subscribe({
       next: (data: Book[]) => {
         this.originalBooks = data;
         this.applyFiltersAndSorting();
+        this.loading = false; // Hide loader after success
       },
       error: (err) => {
         console.error(err);
         Swal.fire('Error!', 'Failed to fetch books.', 'error');
-      }
+        this.loading = false; // Hide loader even if error
+      },
     });
   }
 
@@ -68,19 +74,23 @@ export class AllBooks implements OnInit {
 
     // Category filter
     if (this.filters.category) {
-      filtered = filtered.filter(b => b.categoryName === this.filters.category);
+      filtered = filtered.filter(
+        (b) => b.categoryName === this.filters.category
+      );
     }
     // Availability filter
     if (this.filters.availability) {
       if (this.filters.availability === 'in-stock') {
-        filtered = filtered.filter(b => b.stockQuantity > 0);
+        filtered = filtered.filter((b) => b.stockQuantity > 0);
       } else if (this.filters.availability === 'out-of-stock') {
-        filtered = filtered.filter(b => b.stockQuantity === 0);
+        filtered = filtered.filter((b) => b.stockQuantity === 0);
       }
     }
     // Price filter
     filtered = filtered.filter(
-      b => b.price >= this.filters.priceRange[0] && b.price <= this.filters.priceRange[1]
+      (b) =>
+        b.price >= this.filters.priceRange[0] &&
+        b.price <= this.filters.priceRange[1]
     );
 
     // Sorting
@@ -90,18 +100,19 @@ export class AllBooks implements OnInit {
       filtered.sort((a, b) => b.price - a.price);
     } else if (this.sortOption === 'date-asc') {
       filtered.sort(
-        (a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
+        (a, b) =>
+          new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
       );
     } else if (this.sortOption === 'date-desc') {
       filtered.sort(
-        (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+        (a, b) =>
+          new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
       );
     }
 
     this.books = filtered;
   }
 }
-
 
 // import { Component, OnInit } from '@angular/core';
 // import { BookControls } from '../../../shared/book-controls/book-controls';
@@ -254,4 +265,3 @@ export class AllBooks implements OnInit {
 //     this.books = filtered;
 //   }
 // }
-

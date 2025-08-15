@@ -10,6 +10,7 @@ import { AllBooks } from './pages/books/all-books/all-books';
 import { RecommendedBooks } from './pages/books/recommended-books/recommended-books';
 import { TrendingBooks } from './pages/books/trending-books/trending-books';
 import { EditBooks } from './pages/admin/edit-books/edit-books';
+import { AddBook } from './pages/admin/add-book/add-book';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'books/trending', component: TrendingBooks },
   
   { path: 'admin/edit-book/:id', component: EditBooks },
+  { path: 'admin/add-book', component: AddBook },
   { path: '**', redirectTo: '', pathMatch: 'full' }, // wildcard route
 ];

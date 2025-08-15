@@ -1,0 +1,58 @@
+<div class="topMargin">
+  <div class="add-book-container" *ngIf="book; else loading">
+    <h1>Add Book</h1>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" placeholder="Add Title" [(ngModel)]="book.title" />
+    </div>
+
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" placeholder="Add Author" [(ngModel)]="book.author" />
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" placeholder="Price" [(ngModel)]="book.price" />
+    </div>
+
+    <div class="form-group">
+      <label>ISBN</label>
+      <input type="text" placeholder="Add ISBN" [(ngModel)]="book.isbn" />
+    </div>
+
+    <div class="form-group">
+      <label>Publish Date</label>
+      <input type="date" [(ngModel)]="book.publishDate" />
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <input type="text" placeholder="Category" [(ngModel)]="book.category" />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea placeholder="Description" [(ngModel)]="book.description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Image URL</label>
+      <input type="text" placeholder="Image URL" [(ngModel)]="book.image" />
+    </div>
+
+    <div class="image-preview" *ngIf="book.image">
+      <img [src]="book.image" alt="Book Cover" />
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" (click)="handleSave()">Save</button>
+      <button class="btn btn-secondary" (click)="handleCancel()">Cancel</button>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p class="loading-text">Loading...</p>
+  </ng-template>
+</div>

@@ -272,6 +272,10 @@
   font-weight: bold;
 }
 
+.stats{
+  margin-bottom: 1rem;
+  background-color: #fac466;
+}
 
 .price {
   font-weight: 800;

@@ -12,6 +12,7 @@ import { TrendingBooks } from './pages/books/trending-books/trending-books';
 import { EditBooks } from './pages/admin/edit-books/edit-books';
 import { AddBook } from './pages/admin/add-book/add-book';
 import { LowStocks } from './pages/admin/low-stocks/low-stocks';
+import { StatsComponent } from './pages/admin/stats/stats';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -27,5 +28,6 @@ export const routes: Routes = [
   { path: 'admin/edit-book/:id', component: EditBooks },
   { path: 'admin/add-book', component: AddBook },
   { path: 'admin/books/low-stock', component: LowStocks },
+  { path: 'admin/stats', component: StatsComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }, // wildcard route
 ];

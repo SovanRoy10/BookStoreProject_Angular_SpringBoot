@@ -267,6 +267,11 @@
   font-weight: 500;
 }
 
+.low-stock {
+  color: red;
+  font-weight: bold;
+}
+
 
 .price {
   font-weight: 800;

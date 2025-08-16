@@ -12,9 +12,10 @@ interface Book {
   price: number;
   isbn: string;
   publishDate: string;
-  category: string;
+  categoryName: string;
   description: string;
-  image: string;
+  coverImageUrl: string;
+  stockQuantity: number;
 }
 
 @Component({
@@ -32,9 +33,10 @@ export class AddBook implements OnInit {
     price: 0,
     isbn: '',
     publishDate: '',
-    category: '',
+    categoryName: '',
     description: '',
-    image: '',
+    coverImageUrl: '',
+    stockQuantity: 0
   };
 
   constructor(private router: Router, private bookService: BookService) {}
@@ -43,16 +45,17 @@ export class AddBook implements OnInit {
     // Nothing to load for add mode
   }
 
-   private isFormValid(): boolean {
+  private isFormValid(): boolean {
     return (
       this.book.title.trim() !== '' &&
       this.book.author.trim() !== '' &&
       this.book.price > 0 &&
       this.book.isbn.trim() !== '' &&
       this.book.publishDate.trim() !== '' &&
-      this.book.category.trim() !== '' &&
+      this.book.categoryName.trim() !== '' &&
       this.book.description.trim() !== '' &&
-      this.book.image.trim() !== ''
+      this.book.coverImageUrl.trim() !== '' &&
+      this.book.stockQuantity >0
     );
   }
 
@@ -71,7 +74,8 @@ export class AddBook implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, save it!',
     }).then((result) => {
-      if (result.isConfirmed) { // add book api call
+      if (result.isConfirmed) {
+        // add book api call
         this.bookService.addBook(this.book).subscribe({
           next: () => {
             Swal.fire('Added!', 'The new book has been saved.', 'success');

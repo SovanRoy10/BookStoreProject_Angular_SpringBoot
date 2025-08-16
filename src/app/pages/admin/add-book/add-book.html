@@ -1,25 +1,27 @@
+
+
 <div class="topMargin">
   <div class="add-book-container" *ngIf="book; else loading">
     <h1>Add Book</h1>
 
     <div class="form-group">
       <label>Title</label>
-      <input type="text" placeholder="Add Title" [(ngModel)]="book.title" />
+      <input type="text" [(ngModel)]="book.title" placeholder="Title" />
     </div>
 
     <div class="form-group">
       <label>Author</label>
-      <input type="text" placeholder="Add Author" [(ngModel)]="book.author" />
+      <input type="text" [(ngModel)]="book.author" placeholder="Author" />
     </div>
 
     <div class="form-group">
       <label>Price</label>
-      <input type="number" placeholder="Price" [(ngModel)]="book.price" />
+      <input type="number" [(ngModel)]="book.price" placeholder="Price" />
     </div>
 
     <div class="form-group">
       <label>ISBN</label>
-      <input type="text" placeholder="Add ISBN" [(ngModel)]="book.isbn" />
+      <input type="text" [(ngModel)]="book.isbn" placeholder="ISBN" />
     </div>
 
     <div class="form-group">
@@ -29,21 +31,37 @@
 
     <div class="form-group">
       <label>Category</label>
-      <input type="text" placeholder="Category" [(ngModel)]="book.category" />
+      <input
+        type="text"
+        [(ngModel)]="book.categoryName"
+        placeholder="Category"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Stock Quantity</label>
+      <input type="number" [(ngModel)]="book.stockQuantity" placeholder="Price" />
     </div>
 
     <div class="form-group">
       <label>Description</label>
-      <textarea placeholder="Description" [(ngModel)]="book.description"></textarea>
+      <textarea
+        [(ngModel)]="book.description"
+        placeholder="Description"
+      ></textarea>
     </div>
 
     <div class="form-group">
       <label>Image URL</label>
-      <input type="text" placeholder="Image URL" [(ngModel)]="book.image" />
+      <input
+        type="text"
+        [(ngModel)]="book.coverImageUrl"
+        placeholder="Image URL"
+      />
     </div>
 
-    <div class="image-preview" *ngIf="book.image">
-      <img [src]="book.image" alt="Book Cover" />
+    <div class="image-preview">
+      <img *ngIf [src]="book.coverImageUrl" alt="Book Cover" />
     </div>
 
     <div class="button-group">
@@ -53,7 +71,7 @@
   </div>
 
   <ng-template #loading>
-     <div class="loader-container">
+    <div class="loader-container">
       <span class="loader"></span>
     </div>
   </ng-template>

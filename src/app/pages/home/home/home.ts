@@ -174,29 +174,6 @@ export class Home {
     }
   }
 
-  updateStock(
-    bookId: number,
-    bookTitle: string,
-    newStock: number,
-    resetInput: () => void
-  ) {
-    this.confirmAction(
-      'Change Stock?',
-      `Are you sure you want to set stock for "${bookTitle}" to ${newStock}?`,
-      'Yes, update it!',
-      () => {
-        axios
-          .post(`/api/books/${bookId}/update-stock`, { stock: newStock })
-          .then(() =>
-            Swal.fire('Updated!', 'Stock has been updated.', 'success')
-          )
-          .catch(() => {
-            Swal.fire('Error!', 'Failed to update stock.', 'error');
-            resetInput();
-          });
-      }
-    );
-  }
   loading = false;
 
   // get all books api
@@ -243,7 +220,6 @@ export class Home {
     this.router.navigate([`/admin/edit-book/${bookId}`]);
   }
 
-
   // bulk upload api
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -280,14 +256,17 @@ export class Home {
     this.bookService.getLowStockBooks(this.stockThreshold).subscribe({
       next: (data) => {
         this.lowStockBooks = data;
+
         if (this.isAdmin && this.lowStockBooks.length > 0) {
-          Swal.fire({
-            title: 'Low Stock Alert 🚨',
-            html: this.lowStockBooks
-              .map((b) => `<b>${b.title}</b> (Stock: ${b.stockQuantity})`)
-              .join('<br>'),
-            icon: 'warning',
-          });
+          setTimeout(() => {
+            Swal.fire({
+              title: 'Low Stock Alert 🚨',
+              html: this.lowStockBooks
+                .map((b) => `<b>${b.title}</b> (Stock: ${b.stockQuantity})`)
+                .join('<br>'),
+              icon: 'warning',
+            });
+          }, 3000); // 3 seconds delay
         }
       },
       error: () => {

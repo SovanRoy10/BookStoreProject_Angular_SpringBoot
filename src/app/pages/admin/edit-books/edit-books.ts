@@ -15,6 +15,7 @@ interface Book {
   categoryName: string;
   description: string;
   coverImageUrl: string;
+  stockQuantity: number;
 }
 
 @Component({
@@ -60,7 +61,8 @@ export class EditBooks implements OnInit {
       this.book.publishDate.trim() !== '' &&
       this.book.categoryName.trim() !== '' &&
       this.book.description.trim() !== '' &&
-      this.book.coverImageUrl.trim() !== ''
+      this.book.coverImageUrl.trim() !== '' &&
+      this.book.stockQuantity >0
     );
   }
 

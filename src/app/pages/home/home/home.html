@@ -62,13 +62,8 @@
           <td>{{ book.id }}</td>
           <td>{{ book.title }}</td>
           <td>₹{{ book.price }}</td>
-          <td>
-            <input
-              #stockInput
-              type="number"
-              class="input stock-input"
-              [value]="10"
-            />
+          <td [ngClass]="{ 'low-stock': book.stockQuantity < 5 }">
+            {{ book.stockQuantity }}
           </td>
           <td>
             <div class="admin-actions">
@@ -165,7 +160,6 @@
       </tbody>
     </table>
   </section>
-
 
   } @else {
   <!-- USER VIEW -->

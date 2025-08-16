@@ -257,6 +257,17 @@
   margin-top: 0.25rem;
 } */
 
+.low-stock-banner {
+  background: #fff3cd;
+  color: #856404;
+  padding: 1rem;
+  border: 1px solid #ffeeba;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+
 .price {
   font-weight: 800;
 }

@@ -15,7 +15,15 @@
  .logo img {
   height: 40px;
 }
-
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar a{
+  text-decoration: none;
+  color: black;
+}
 .search-bar {
   display: flex;
   flex-grow: 1;

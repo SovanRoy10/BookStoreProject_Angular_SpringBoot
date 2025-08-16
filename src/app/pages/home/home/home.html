@@ -7,11 +7,13 @@
       @for (book of searchResults; track book.id) {
       <div class="book-card">
         <img [src]="book.coverImageUrl" alt="{{ book.title }}" />
-        <h4>{{
-              book.title.length > 16
-                ? (book.title | slice : 0 : 16) + "..."
-                : book.title
-            }}</h4>
+        <h4>
+          {{
+            book.title.length > 16
+              ? (book.title | slice : 0 : 16) + "..."
+              : book.title
+          }}
+        </h4>
         <p>{{ book.author }}</p>
         <p>₹{{ book.price }}</p>
       </div>
@@ -37,6 +39,11 @@
         style="display: none"
         (change)="onFileSelected($event)"
       />
+    </div>
+
+    <div *ngIf="lowStockBooks.length > 0" class="low-stock-banner">
+      ⚠ {{ lowStockBooks.length }} books are running low on stock.
+      <a [routerLink]="'/admin/books/low-stock'">Review</a>
     </div>
 
     <table class="table">
@@ -91,7 +98,6 @@
           <th>User ID</th>
           <th>Name</th>
           <th>Email</th>
-          <th style="width: 120px">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -100,15 +106,6 @@
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td class="text-center">
-            <button
-              class="btn btn-danger"
-              (click)="confirmDeleteUser(user.id, user.name)"
-              [attr.aria-label]="'Delete user ' + user.name"
-            >
-              Delete
-            </button>
-          </td>
         </tr>
         } @if (users.length === 0) {
         <tr>
@@ -169,7 +166,6 @@
     </table>
   </section>
 
-  <app-manage-admins></app-manage-admins>
 
   } @else {
   <!-- USER VIEW -->
@@ -231,7 +227,7 @@
       <div class="book-card">
         <img [src]="book.coverImageUrl" [alt]="book.title" />
         <div class="info">
-           <div class="title">
+          <div class="title">
             {{
               book.title.length > 19
                 ? (book.title | slice : 0 : 19) + "..."
@@ -265,7 +261,7 @@
       <div class="book-card">
         <img [src]="book.coverImageUrl" [alt]="book.title" />
         <div class="info">
-           <div class="title">
+          <div class="title">
             {{
               book.title.length > 19
                 ? (book.title | slice : 0 : 19) + "..."
@@ -291,5 +287,5 @@
 </div>
 
 <div *ngIf="loading" class="loader-container">
-    <span class="loader"></span>
-  </div>
+  <span class="loader"></span>
+</div>

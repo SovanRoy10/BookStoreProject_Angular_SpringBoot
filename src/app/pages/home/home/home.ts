@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ManageAdminsComponent } from '../../../shared/manage-admins/manage-admins';
 import { BookService } from '../../../services/book';
 
 export interface Book {
@@ -22,7 +21,7 @@ export interface Book {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterModule, ManageAdminsComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
@@ -41,7 +40,7 @@ export class Home {
   ) {
     throw new Error('Method not implemented.');
   }
-  isAdmin = false; // toggle for admin/user view
+  isAdmin = true; // toggle for admin/user view
 
   books: Book[] = [];
   // books = [
@@ -143,6 +142,9 @@ export class Home {
   //   },
   // ];
 
+  lowStockBooks: Book[] = [];
+  stockThreshold = 5; // you can change this to any limit
+
   users = [
     { id: 'U001', name: 'John Doe', email: 'john@example.com' },
     { id: 'U002', name: 'Jane Smith', email: 'jane@example.com' },
@@ -204,7 +206,6 @@ export class Home {
       next: (data) => {
         this.books = data;
         this.loading = false;
-        
       },
       error: () => {
         Swal.fire('Error!', 'Failed to fetch books.', 'error');
@@ -242,22 +243,6 @@ export class Home {
     this.router.navigate([`/admin/edit-book/${bookId}`]);
   }
 
-  async confirmDeleteUser(userId: string, userName: string) {
-    const result = await Swal.fire({
-      title: 'Delete User?',
-      text: `Are you sure you want to delete user "${userName}"? This action cannot be undone.`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#2563eb',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!',
-    });
-
-    if (result.isConfirmed) {
-      this.users = this.users.filter((user) => user.id !== userId);
-      Swal.fire('Deleted!', 'User has been deleted.', 'success');
-    }
-  }
 
   // bulk upload api
   onFileSelected(event: Event) {
@@ -287,6 +272,28 @@ export class Home {
         });
       }
     );
+  }
+
+  // low stock api
+  // new method
+  loadLowStockBooks() {
+    this.bookService.getLowStockBooks(this.stockThreshold).subscribe({
+      next: (data) => {
+        this.lowStockBooks = data;
+        if (this.isAdmin && this.lowStockBooks.length > 0) {
+          Swal.fire({
+            title: 'Low Stock Alert 🚨',
+            html: this.lowStockBooks
+              .map((b) => `<b>${b.title}</b> (Stock: ${b.stockQuantity})`)
+              .join('<br>'),
+            icon: 'warning',
+          });
+        }
+      },
+      error: () => {
+        console.error('Failed to fetch low stock books');
+      },
+    });
   }
 
   // search api call
@@ -339,5 +346,7 @@ export class Home {
         this.loading = false;
       }
     });
+
+    this.loadLowStockBooks();
   }
 }

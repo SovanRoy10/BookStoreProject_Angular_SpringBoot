@@ -95,6 +95,13 @@ export class BookService {
     // return this.http.get(`${this.apiUrl}/get-all-categories`);
     return this.http.get(`https://dummyjson.com/c/eff1-4df4-47b8-9f10`);
   }
+
+  // Get low stock books
+  getLowStockBooks(threshold: number) {
+  // return this.http.get<any[]>(`/api/books/low-stock?threshold=${threshold}`);
+  return this.http.get<any[]>(`https://dummyjson.com/c/ee13-926c-484d-8fa9`);
+}
+
 }
 
 // /api/books/search?title=book_name: 
@@ -114,3 +121,12 @@ export class BookService {
 
 // make changes in order history table in profile, after clicking the order id , another page open consisting that orders
 // where I have the return option
+
+// profile management
+// name update : password required
+// password update : password old required
+
+// user statistics api/auth/admin/get/stats
+// admin: user count, admin count, customer count , recent user top 5 
+
+// remove user table delete ✅

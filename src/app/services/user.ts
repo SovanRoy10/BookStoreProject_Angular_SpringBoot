@@ -35,4 +35,10 @@ export class UserService {
     // return this.http.get(`${this.apiUrl}/auth/get/profile`);
     return this.http.get(`https://dummyjson.com/c/785e-543a-4ffd-b3f2`);
   }
+
+  // update user profile
+  updateUserProfile(profileData: any): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/auth/update/profile`);
+    return this.http.put(`https://dummyjson.com/c/5c74-b87f-4eb9-9138`,profileData);
+  }
 }

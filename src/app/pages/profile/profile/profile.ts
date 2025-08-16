@@ -61,14 +61,30 @@ export class Profile implements OnInit {
   }
 
   handleSave() {
+    const updatedData = {
+      name: this.name,
+      password: this.password,
+    };
+
     Swal.fire({
       icon: 'info',
       title: 'Saving...',
-      timer: 1000,
-      showConfirmButton: false
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
     });
 
-    console.log('Updated name:', this.name, 'Updated password:', this.password);
-    // Later: API call to update profile
+    this.userService.updateUserProfile(updatedData).subscribe({
+      next: (res) => {
+        Swal.fire('Success!', 'Profile updated successfully', 'success');
+        console.log('Profile update response:', res);
+        this.password = ''; 
+      },
+      error: (err) => {
+        Swal.fire('Error!', 'Failed to update profile', 'error');
+        console.error('Profile update error:', err);
+      }
+    });
   }
 }

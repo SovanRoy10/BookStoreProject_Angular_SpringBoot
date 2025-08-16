@@ -1,10 +1,8 @@
-
-  {
+{
     "accessToken": "eyJhbGciOiJIUzI1NiJ9.custA_token",
     "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custA_refresh",
-    "message": "User fetched successfully",
+    "message": "Profile updated successfully",
     "email": "customerA@bookstore.com",
     "name": "Customer A",
-    "role": "CUSTOMER"
-  }
-  
+    "role": "CUSTOMER" 
+}

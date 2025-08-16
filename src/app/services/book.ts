@@ -102,11 +102,7 @@ export class BookService {
   return this.http.get<any[]>(`https://dummyjson.com/c/ee13-926c-484d-8fa9`);
 }
 
-// Fetch user stats
-  getStats(): Observable<any> {
-    // return this.http.get(`${this.apiUrl}/stats`);
-    return this.http.get(`https://dummyjson.com/c/5cbd-1669-483a-a8ef`);
-  }
+
 
 }
 

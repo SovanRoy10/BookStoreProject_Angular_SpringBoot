@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookService } from '../../../services/book';
+import { UserService } from '../../../services/user';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ export class StatsComponent implements OnInit {
   loading = true;
   stats: any = null;
 
-  constructor(private userService: BookService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.fetchStats();

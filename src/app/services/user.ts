@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class User {
-  private apiUrl = 'https://api.example.com/users'; // change to your API
+export class UserService {
+  private apiUrl = 'https://api.example.com/api'; // change to your API
 
   constructor(private http: HttpClient) {}
 
@@ -18,15 +18,15 @@ export class User {
     return this.http.put(`${this.apiUrl}/profile`, profileData);
   }
 
-  getAllAdmins(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/admins`);
+  // Fetch user stats
+  getStats(): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/stats`);
+    return this.http.get(`https://dummyjson.com/c/5cbd-1669-483a-a8ef`);
   }
 
-  addAdmin(adminData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/admins`, adminData);
-  }
-
-  removeAdmin(adminId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/admins/${adminId}`);
+  // Fetch all users in admin section
+  getAllUsers(): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/auth/admin/get/users`);
+    return this.http.get(`https://dummyjson.com/c/3fba-8932-4a12-9b3a`);
   }
 }

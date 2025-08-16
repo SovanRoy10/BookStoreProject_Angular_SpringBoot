@@ -1,10 +1,42 @@
 [
   {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQ1VTVE9NRVIiLCJuYW1lIjoiQ3VzdG9tZXIgQSIsInN1YiI6ImN1c3RvbWVyQUBib29rc3RvcmUuY29tIiwiaWF0IjoxNzU1MzMyNjY3LCJleHAiOjE3NTUzMzM1Njd9.fbAzX5F702hJ3OkQtEBsdc2U_rFYmeTEtdWyqxNJFns",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lckFAYm9va3N0b3JlLmNvbSIsImlhdCI6MTc1NTMzMjY2NywiZXhwIjoxNzU1OTM3NDY3fQ.voFSwd7zj7Yy-JY24uxGux1ARjjvS8e8O4UiHtgJWUg",
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custA_token",
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custA_refresh",
     "message": "User fetched successfully",
     "email": "customerA@bookstore.com",
     "name": "Customer A",
+    "role": "CUSTOMER"
+  },
+  {
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.admin1_token",
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.admin1_refresh",
+    "message": "User fetched successfully",
+    "email": "admin1@bookstore.com",
+    "name": "Admin One",
+    "role": "ADMIN"
+  },
+  {
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custB_token",
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custB_refresh",
+    "message": "User fetched successfully",
+    "email": "customerB@bookstore.com",
+    "name": "Customer B",
+    "role": "CUSTOMER"
+  },
+  {
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.admin2_token",
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.admin2_refresh",
+    "message": "User fetched successfully",
+    "email": "admin2@bookstore.com",
+    "name": "Admin Two",
+    "role": "ADMIN"
+  },
+  {
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custC_token",
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custC_refresh",
+    "message": "User fetched successfully",
+    "email": "customerC@bookstore.com",
+    "name": "Customer C",
     "role": "CUSTOMER"
   }
 ]

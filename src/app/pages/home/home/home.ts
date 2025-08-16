@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BookService } from '../../../services/book';
+import { BookService } from '../../../services/book'; 
+import { UserService } from '../../../services/user';
 
 export interface Book {
   id: number;
@@ -17,6 +18,15 @@ export interface Book {
   stockQuantity: number;
   description: string;
   coverImageUrl: string;
+}
+
+export interface User {
+  accessToken: string;
+  refreshToken: string;
+  message: number;
+  email: string;
+  name: string;
+  role: string;
 }
 
 @Component({
@@ -145,14 +155,11 @@ export class Home {
   lowStockBooks: Book[] = [];
   stockThreshold = 5; // you can change this to any limit
 
-  users = [
-    { id: 'U001', name: 'John Doe', email: 'john@example.com' },
-    { id: 'U002', name: 'Jane Smith', email: 'jane@example.com' },
-  ];
+  users: User[] = [];   // now comes from API
 
   searchResults: any[] = [];
 
-  constructor(private router: Router, private bookService: BookService) {}
+  constructor(private router: Router, private bookService: BookService,private  userService : UserService) {}
 
   private async confirmAction(
     title: string,
@@ -251,7 +258,6 @@ export class Home {
   }
 
   // low stock api
-  // new method
   loadLowStockBooks() {
     this.bookService.getLowStockBooks(this.stockThreshold).subscribe({
       next: (data) => {
@@ -275,9 +281,35 @@ export class Home {
     });
   }
 
+  // get all users for admin
+  loadUsers() {
+    this.loading = true;
+    this.userService.getAllUsers().subscribe({
+      next: (data) => {
+        this.users = data;
+        this.loading = false;
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Users Loaded!',
+          toast: true,
+          position: 'top-end',
+          timer: 2000,
+          showConfirmButton: false
+        });
+      },
+      error: (err) => {
+        this.loading = false;
+        Swal.fire('Error!', 'Failed to fetch users.', 'error');
+        console.error('User fetch error:', err);
+      },
+    });
+  }
+
   // search api call
   ngOnInit() {
     this.loadBooks();
+    this.loadUsers();
     // Fetch books from API when home page loads
     this.loading = true;
     this.bookService.getAllBooks().subscribe({

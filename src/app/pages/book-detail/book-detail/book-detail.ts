@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BookService } from '../../../services/book';
+import Swal from 'sweetalert2';
 
 interface Review {
   id: number;
@@ -12,10 +14,10 @@ interface Review {
 }
 
 @Component({
-  imports :[FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   selector: 'app-book-detail',
   templateUrl: './book-detail.html',
-  styleUrl: './book-detail.css'
+  styleUrls: ['./book-detail.css'],
 })
 export class BookDetail implements OnInit {
   id!: string;
@@ -27,55 +29,62 @@ export class BookDetail implements OnInit {
   error: string = '';
   success: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private bookService: BookService
+  ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.loadBook();
+    this.loadReviews();
 
-    // Simulated book data
-    this.book = {
-      id: this.id,
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-      price: 299,
-      isbn: '9780743273565',
-      publishDate: '1925-04-10',
-      category: 'Classic Literature',
-      // categoryName
-      stock: 12,
-      // stockQuanity
-      description:
-        'A novel set in the Roaring Twenties, telling the story of Jay Gatsby and his unrequited love for Daisy Buchanan.',
-      image:
-        'https://www.bookswagon.com/productimages/images200/862/9780190635862.jpg'
-        // coverImageUrl
-    };
-
-    // Simulated reviews
-    this.reviews = [
-      {
-        id: 1,
-        name: 'John Doe',
-        rating: 5,
-        date: '2025-08-01',
-        comment: 'Amazing book! A timeless classic.'
-      },
-      {
-        id: 2,
-        name: 'Jane Smith',
-        rating: 4,
-        date: '2025-07-28',
-        comment: 'Loved the writing style and characters.'
-      }
-    ];
-
-    // Simulated user
+    // Simulated logged-in user
     this.user = {
       name: 'Sovan Roy',
-      orderHistory: ['123', '456', this.id]
+      orderHistory: [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     };
 
     window.scrollTo(0, 0);
+  }
+
+  loadBook() {
+    Swal.fire({
+      title: 'Loading book...',
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+
+    this.bookService.getBookById(this.id).subscribe({
+      next: (data) => {
+        this.book = data;
+        console.log('📘 Book ID:', this.book.id);
+        console.log('🛒 User orderHistory:', this.user?.orderHistory);
+        Swal.close();
+      },
+      error: (err) => {
+        Swal.fire('Error!', 'Failed to load book details', 'error');
+        console.error('Book load error:', err);
+      },
+    });
+  }
+
+  loadReviews() {
+    this.bookService.getReviewsUsingBookId(this.id).subscribe({
+      next: (data: any[]) => {
+        this.reviews = data.map((r) => ({
+          id: r.reviewId,
+          name: r.user?.name || 'Anonymous',
+          rating: r.rating,
+          date: new Date(r.reviewDate).toISOString().slice(0, 10),
+          comment: r.comment,
+        }));
+      },
+      error: (err) => {
+        Swal.fire('Error!', 'Failed to load reviews', 'error');
+        console.error('Review load error:', err);
+      },
+    });
   }
 
   get averageRating(): string {
@@ -99,11 +108,7 @@ export class BookDetail implements OnInit {
       return;
     }
 
-    if (
-      isNaN(this.newRating) ||
-      this.newRating < 0.5 ||
-      this.newRating > 5
-    ) {
+    if (isNaN(this.newRating) || this.newRating < 0.5 || this.newRating > 5) {
       this.error = 'Rating must be between 0.5 and 5.';
       return;
     }
@@ -113,12 +118,17 @@ export class BookDetail implements OnInit {
       name: this.user.name,
       rating: this.newRating,
       date: new Date().toISOString().slice(0, 10),
-      comment: this.newComment.trim()
+      comment: this.newComment.trim(),
     };
 
+    // Prepend review to UI
     this.reviews = [newReview, ...this.reviews];
+
+    // Reset form
     this.newComment = '';
     this.newRating = 5;
+
     this.success = 'Review added successfully!';
+    Swal.fire('Success!', 'Your review has been added.', 'success');
   }
 }

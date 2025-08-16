@@ -1,16 +1,16 @@
 <div class="book-detail">
   <!-- Book Info -->
   <div class="book-main">
-    <img [src]="book.image" [alt]="book.title" class="book-image" />
+    <img [src]="book?.coverImageUrl" [alt]="book?.title" class="book-image" />
     <div class="book-info">
-      <h1>{{ book.title }}</h1>
-      <p><strong>Author:</strong> {{ book.author }}</p>
-      <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-      <p><strong>Publish Date:</strong> {{ book.publishDate }}</p>
-      <p><strong>Category:</strong> {{ book.category }}</p>
-      <p class="price">₹{{ book.price }}</p>
-      <p><strong>Stock:</strong> {{ book.stock }} available</p>
-      <p class="description">{{ book.description }}</p>
+      <h1>{{ book?.title }}</h1>
+      <p><strong>Author:</strong> {{ book?.author }}</p>
+      <p><strong>ISBN:</strong> {{ book?.isbn }}</p>
+      <p><strong>Publish Date:</strong> {{ book?.publishDate }}</p>
+      <p><strong>Category:</strong> {{ book?.categoryName }}</p>
+      <p class="price">₹{{ book?.price }}</p>
+      <p><strong>Stock:</strong> {{ book?.stock }} available</p>
+      <p class="description">{{ book?.description }}</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
   </div>
@@ -18,20 +18,19 @@
   <!-- Reviews -->
   <div class="reviews">
     <h2>
-      Reviews (Average Rating: {{ averageRating }}
-      <span class="star">★</span>)
+      Reviews (Average Rating: {{ averageRating }} <span class="star">★</span>)
     </h2>
 
     <!-- Add Review Form -->
     <div class="review-form">
       <h3>Add Your Review</h3>
 
-      <p *ngIf="!user.orderHistory.includes(book.id)" class="error">
+      <p *ngIf="!user.orderHistory.includes(book?.id)" class="error">
         You must purchase this book to leave a review.
       </p>
 
       <form
-        *ngIf="user.orderHistory.includes(book.id)"
+        *ngIf="user.orderHistory.includes(book?.id)"
         (ngSubmit)="handleSubmitReview()"
       >
         <label>

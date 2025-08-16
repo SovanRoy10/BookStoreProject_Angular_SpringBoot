@@ -1,8 +1,64 @@
-{
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custA_token",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custA_refresh",
-    "message": "Profile updated successfully",
-    "email": "customerA@bookstore.com",
-    "name": "Customer A",
-    "role": "CUSTOMER" 
-}
+[
+  {
+    "reviewId": 1,
+    "rating": 3.5,
+    "comment": null,
+    "reviewDate": "2025-08-16T14:07:41.457706",
+    "book": {
+      "bookId": 2,
+      "title": "Wings of Fire",
+      "author": "A.P.J. Abdul Kalam",
+      "description": "Autobiography of India's missile man and former president.",
+      "price": 250,
+      "isbn": "9788173711466",
+      "publishedDate": "01-01-1999",
+      "stockQuantity": 40,
+      "category": {
+        "categoryId": 2,
+        "name": "Biography"
+      },
+      "coverImageUrl": "https://example.com/covers/wings-of-fire.jpg",
+      "createdAt": "2025-08-16T14:02:56.479039",
+      "updatedAt": "2025-08-16T14:02:56.479039"
+    },
+    "user": {
+      "userId": 1,
+      "name": "Customer A",
+      "email": "customerA@bookstore.com",
+      "role": "CUSTOMER",
+      "createdAt": "2025-08-16T13:54:27.213649",
+      "updatedAt": "2025-08-16T13:54:27.213649"
+    }
+  },
+  {
+    "reviewId": 2,
+    "rating": 3.8,
+    "comment": null,
+    "reviewDate": "2025-08-16T14:10:16.634385",
+    "book": {
+      "bookId": 2,
+      "title": "Wings of Fire",
+      "author": "A.P.J. Abdul Kalam",
+      "description": "Autobiography of India's missile man and former president.",
+      "price": 250,
+      "isbn": "9788173711466",
+      "publishedDate": "01-01-1999",
+      "stockQuantity": 40,
+      "category": {
+        "categoryId": 2,
+        "name": "Biography"
+      },
+      "coverImageUrl": "https://example.com/covers/wings-of-fire.jpg",
+      "createdAt": "2025-08-16T14:02:56.479039",
+      "updatedAt": "2025-08-16T14:02:56.479039"
+    },
+    "user": {
+      "userId": 4,
+      "name": "Admin B",
+      "email": "adminB@bookstore.com",
+      "role": "ADMIN",
+      "createdAt": "2025-08-16T13:56:21.267738",
+      "updatedAt": "2025-08-16T13:56:21.267738"
+    }
+  }
+]

@@ -102,7 +102,11 @@ export class BookService {
   return this.http.get<any[]>(`https://dummyjson.com/c/ee13-926c-484d-8fa9`);
 }
 
-
+// get review of a particular book
+getReviewsUsingBookId(id: number | string) {
+  // return this.http.get<any[]>(`reviews/get/${id}`);
+  return this.http.get<any[]>(`https://dummyjson.com/c/0705-4faa-4ed0-abdb`);
+}
 
 }
 

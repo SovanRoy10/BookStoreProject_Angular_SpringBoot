@@ -50,7 +50,7 @@ export class Home {
   ) {
     throw new Error('Method not implemented.');
   }
-  isAdmin = true; // toggle for admin/user view
+  isAdmin = false; // toggle for admin/user view
 
   books: Book[] = [];
   // books = [

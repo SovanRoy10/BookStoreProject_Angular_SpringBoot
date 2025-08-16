@@ -40,13 +40,15 @@
       <div class="form-group">
         <label>Role</label>
         <select name="role" [(ngModel)]="formData.role">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+          <option value="CUSTOMER">Customer</option>
+          <option value="ADMIN">Admin</option>
         </select>
       </div>
 
       <!-- Submit -->
-      <button type="submit" class="btn-primary">Register</button>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
     </form>
 
     <p class="login-text">

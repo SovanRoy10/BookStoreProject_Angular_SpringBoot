@@ -288,15 +288,6 @@ export class Home {
       next: (data) => {
         this.users = data;
         this.loading = false;
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Users Loaded!',
-          toast: true,
-          position: 'top-end',
-          timer: 2000,
-          showConfirmButton: false
-        });
       },
       error: (err) => {
         this.loading = false;

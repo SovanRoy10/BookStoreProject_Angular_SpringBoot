@@ -1,4 +1,4 @@
-[
+
   {
     "accessToken": "eyJhbGciOiJIUzI1NiJ9.custA_token",
     "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custA_refresh",
@@ -6,37 +6,5 @@
     "email": "customerA@bookstore.com",
     "name": "Customer A",
     "role": "CUSTOMER"
-  },
-  {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.admin1_token",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.admin1_refresh",
-    "message": "User fetched successfully",
-    "email": "admin1@bookstore.com",
-    "name": "Admin One",
-    "role": "ADMIN"
-  },
-  {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custB_token",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custB_refresh",
-    "message": "User fetched successfully",
-    "email": "customerB@bookstore.com",
-    "name": "Customer B",
-    "role": "CUSTOMER"
-  },
-  {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.admin2_token",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.admin2_refresh",
-    "message": "User fetched successfully",
-    "email": "admin2@bookstore.com",
-    "name": "Admin Two",
-    "role": "ADMIN"
-  },
-  {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9.custC_token",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.custC_refresh",
-    "message": "User fetched successfully",
-    "email": "customerC@bookstore.com",
-    "name": "Customer C",
-    "role": "CUSTOMER"
   }
-]
+  

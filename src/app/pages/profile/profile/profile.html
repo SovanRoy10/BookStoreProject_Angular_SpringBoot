@@ -4,21 +4,21 @@
   <!-- Profile Header -->
   <div class="profile-header">
     <img
-      [src]="user.avatar"
-      [alt]="user.name"
+      [src]="avatar"
+      [alt]="name"
       class="profile-avatar"
     />
     <div>
-      <h2 class="profile-name">{{ user.name }}</h2>
-      <p class="profile-email">{{ user.email }}</p>
-      <p class="profile-joined">Joined: {{ user.joined }}</p>
+      <h2 class="profile-name">{{ name }}</h2>
+      <p class="profile-email">{{ email }}</p>
+      <p class="profile-role">Role: {{ role }}</p>
     </div>
   </div>
 
   <!-- Account Details -->
   <div class="account-section">
     <h3 class="section-title">Account Details</h3>
-    <p class="total-orders">Total Orders: {{ user.orders }}</p>
+    <p class="total-orders">Total Orders: {{ orderHistory.length }}</p>
 
     <!-- Editable Fields -->
     <div class="form-group">

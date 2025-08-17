@@ -20,9 +20,10 @@ export class Profile implements OnInit {
   email: string = '';
   role: string = '';
   avatar: string = '';
-  password: string = '';
+  
+  password: string = '';      // new password
+  oldPassword: string = '';   // required field
 
-  // Keep static orders for now
   orderHistory = [
     { id: '#1001', bookTitle: 'Atomic Habits', date: '2025-07-01', price: 599, status: 'Delivered' },
     { id: '#1002', bookTitle: 'The Alchemist', date: '2025-07-15', price: 299, status: 'On the way' },
@@ -40,18 +41,14 @@ export class Profile implements OnInit {
     this.userService.getUserProfile().subscribe({
       next: (data) => {
         this.user = data;
-
         this.name = data.name;
         this.email = data.email;
         this.role = data.role;
-
         this.isAdmin = data.role === 'ADMIN';
 
-        // generate avatar from user name
         this.avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
           data.name
         )}&background=random`;
-
       },
       error: (err) => {
         Swal.fire('Error!', 'Failed to load profile', 'error');
@@ -61,10 +58,23 @@ export class Profile implements OnInit {
   }
 
   handleSave() {
-    const updatedData = {
-      name: this.name,
-      password: this.password,
+    // Ensure old password is required if making changes
+    if (!this.oldPassword.trim()) {
+      Swal.fire('Error!', 'Old password is required to update profile.', 'error');
+      return;
+    }
+
+    const updatedData: any = {
+      oldPassword: this.oldPassword
     };
+
+    if (this.name !== this.user.name) {
+      updatedData.name = this.name;
+    }
+
+    if (this.password.trim()) {
+      updatedData.newPassword = this.password;
+    }
 
     Swal.fire({
       icon: 'info',
@@ -79,7 +89,10 @@ export class Profile implements OnInit {
       next: (res) => {
         Swal.fire('Success!', 'Profile updated successfully', 'success');
         console.log('Profile update response:', res);
-        this.password = ''; 
+
+        this.password = '';
+        this.oldPassword = '';
+        this.user.name = this.name; // update locally too
       },
       error: (err) => {
         Swal.fire('Error!', 'Failed to update profile', 'error');

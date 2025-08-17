@@ -20,6 +20,17 @@
     <h3 class="section-title">Account Details</h3>
     <p class="total-orders">Total Orders: {{ orderHistory.length }}</p>
 
+    <!-- Old Password (Required for all changes) -->
+    <div class="form-group">
+      <label>Old Password <span style="color:red">*</span></label>
+      <input
+        type="password"
+        [(ngModel)]="oldPassword"
+        placeholder="Enter old password"
+        class="form-input"
+      />
+    </div>
+
     <!-- Editable Fields -->
     <div class="form-group">
       <label>Change Name</label>

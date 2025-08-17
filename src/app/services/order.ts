@@ -29,5 +29,11 @@ export class OrderService {
     // return this.http.put(`${this.apiUrl}/${orderId}/status`, { status });
     return this.http.put(`https://dummyjson.com/c/3bb8-537c-458e-9630`, { status });
   }
+
+  // sales report
+  getSalesReport() : Observable<any>{
+    return this.http.get("https://dummyjson.com/c/354a-20d2-4735-8059");
+    // return this.http.get("reports/sales");
+  }
   
 }

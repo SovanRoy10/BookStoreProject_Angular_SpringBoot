@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user';
+import { OrderService } from '../../../services/order';
 
 @Component({
   selector: 'app-profile',
@@ -13,28 +14,26 @@ import { UserService } from '../../../services/user';
 })
 export class Profile implements OnInit {
   user: any = null;
-
   isAdmin = false;
 
   name: string = '';
   email: string = '';
   role: string = '';
   avatar: string = '';
-  
   password: string = '';      // new password
   oldPassword: string = '';   // required field
 
-  orderHistory = [
-    { id: '#1001', bookTitle: 'Atomic Habits', date: '2025-07-01', price: 599, status: 'Delivered' },
-    { id: '#1002', bookTitle: 'The Alchemist', date: '2025-07-15', price: 299, status: 'On the way' },
-    { id: '#1003', bookTitle: 'Sapiens', date: '2025-08-01', price: 650, status: 'Pending' }
-  ];
+  orders: any[] = [];   // will hold API response
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit() {
     window.scrollTo(0, 0);
     this.loadProfile();
+    this.loadOrders();
   }
 
   loadProfile() {
@@ -57,16 +56,25 @@ export class Profile implements OnInit {
     });
   }
 
+  loadOrders() {
+    this.orderService.getOrders().subscribe({
+      next: (data) => {
+        this.orders = data; // assign directly
+      },
+      error: (err) => {
+        Swal.fire('Error!', 'Failed to load orders', 'error');
+        console.error('Orders load error:', err);
+      }
+    });
+  }
+
   handleSave() {
-    // Ensure old password is required if making changes
     if (!this.oldPassword.trim()) {
       Swal.fire('Error!', 'Old password is required to update profile.', 'error');
       return;
     }
 
-    const updatedData: any = {
-      oldPassword: this.oldPassword
-    };
+    const updatedData: any = { oldPassword: this.oldPassword };
 
     if (this.name !== this.user.name) {
       updatedData.name = this.name;
@@ -80,19 +88,15 @@ export class Profile implements OnInit {
       icon: 'info',
       title: 'Saving...',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
+      didOpen: () => Swal.showLoading()
     });
 
     this.userService.updateUserProfile(updatedData).subscribe({
       next: (res) => {
         Swal.fire('Success!', 'Profile updated successfully', 'success');
-        console.log('Profile update response:', res);
-
         this.password = '';
         this.oldPassword = '';
-        this.user.name = this.name; // update locally too
+        this.user.name = this.name;
       },
       error: (err) => {
         Swal.fire('Error!', 'Failed to update profile', 'error');

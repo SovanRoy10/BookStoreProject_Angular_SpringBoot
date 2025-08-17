@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class Order {
+export class OrderService {
   private apiUrl = 'https://api.example.com/orders'; // change to your API
 
   constructor(private http: HttpClient) {}
@@ -15,10 +15,8 @@ export class Order {
   }
 
   getOrders(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get("https://dummyjson.com/c/1069-a7ee-47ff-ac11");
   }
 
-  getOrderById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
-  }
+  
 }

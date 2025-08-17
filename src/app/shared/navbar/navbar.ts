@@ -24,6 +24,10 @@ export class Navbar {
     return this.authService.getUserRole();
   }
 
+  get userName(): string | null {
+    return this.authService.getUserName();
+  }
+
   searchType = 'title';
   searchQuery = '';
 

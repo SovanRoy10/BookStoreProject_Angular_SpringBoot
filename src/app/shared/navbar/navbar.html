@@ -26,7 +26,8 @@
   <div class="right-section">
     <a [routerLink]="isLoggedIn ? '/profile' : '/login'" class="profile-link">
       <span class="icon">👤</span>
-      <span>{{ isLoggedIn ? "John Doe" : "Login" }}</span>
+      <span>{{ isLoggedIn ?`${userName}` : "Login" }}</span>
+      
     </a>
 
     <!-- Hide cart if user is admin -->

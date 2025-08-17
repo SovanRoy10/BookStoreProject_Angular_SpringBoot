@@ -65,6 +65,12 @@ export class Auth {
     return user ? JSON.parse(user).role : null;
   }
 
+  getUserName(): string | null {
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  return user ? user.name : null;
+}
+
+
   isLoggedIn(): boolean {
     return !!localStorage.getItem('accessToken');
   }

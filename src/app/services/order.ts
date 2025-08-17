@@ -18,5 +18,10 @@ export class OrderService {
     return this.http.get("https://dummyjson.com/c/1069-a7ee-47ff-ac11");
   }
 
+  // get all orders for admin
+  
+  getOrdersAdmin(): Observable<any> {
+    return this.http.get("https://dummyjson.com/c/763a-8097-4bb8-95be");
+  }
   
 }

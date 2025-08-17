@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../../services/book'; 
 import { UserService } from '../../../services/user';
 import { Auth } from '../../../services/auth';
+import { OrderService } from '../../../services/order';
+import { FormsModule } from '@angular/forms';
 
 export interface Book {
   id: number;
@@ -32,7 +33,7 @@ export interface User {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,FormsModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
@@ -62,6 +63,7 @@ export class Home {
 
 
   books: Book[] = [];
+  orders: any[] = []; // store all orders
 
   get isAdmin(): boolean {
   return this.authService.getUserRole() === 'ADMIN';
@@ -76,7 +78,14 @@ export class Home {
 
   searchResults: any[] = [];
 
-  constructor(private router: Router, private bookService: BookService,private  userService : UserService,private authService: Auth) {}
+ constructor(
+  private router: Router,
+  private bookService: BookService,
+  private userService: UserService,
+  private authService: Auth,
+  private orderService: OrderService   // 👈 add this
+) {}
+
 
   private async confirmAction(
     title: string,
@@ -218,6 +227,7 @@ export class Home {
   ngOnInit() {
     this.loadBooks();
     this.loadUsers();
+    this.loadOrders();   
     // Fetch books from API when home page loads
     this.loading = true;
     this.bookService.getAllBooks().subscribe({
@@ -268,4 +278,20 @@ export class Home {
 
     this.loadLowStockBooks();
   }
+
+  // get all orders for admin
+loadOrders() {
+  this.loading = true;
+  this.orderService.getOrdersAdmin().subscribe({
+    next: (data) => {
+      this.orders = data;  // your API already returns array of orders
+      this.loading = false;
+    },
+    error: (err) => {
+      this.loading = false;
+      Swal.fire('Error!', 'Failed to fetch orders.', 'error');
+      console.error('Orders fetch error:', err);
+    },
+  });
+}
 }

@@ -86,83 +86,111 @@
     </table>
   </section>
 
- <!-- Users List -->
-<section class="section">
-  <h2 class="section-title">All Users</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Name</th>
-        <th>Role</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of users; track user.email) {
-      <tr>
-        <td>{{ user.email }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.role }}</td>
-      </tr>
-      } @if (users.length === 0) {
-      <tr>
-        <td colspan="3" class="empty">No users found.</td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</section>
-
-
-  <!-- Orders Management -->
+  <!-- Users List -->
   <section class="section">
-    <h2 class="section-title">Orders</h2>
+    <h2 class="section-title">All Users</h2>
     <table class="table">
       <thead>
         <tr>
-          <th>Order ID</th>
-          <th>Book ID</th>
-          <th>User ID</th>
-          <th>Customer</th>
-          <th>Order Date</th>
-          <th>Order Time</th>
-          <th>Status</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Role</th>
         </tr>
       </thead>
       <tbody>
+        @for (user of users; track user.email) {
         <tr>
-          <td>#1001</td>
-          <td>B001</td>
-          <td>U123</td>
-          <td>John Doe</td>
-          <td>2025-08-10</td>
-          <td>15:45</td>
-          <td>
-            <select class="select">
-              <option>On the way</option>
-              <option>Delivered</option>
-              <option>Pending</option>
-            </select>
-          </td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.role }}</td>
         </tr>
+        } @if (users.length === 0) {
         <tr>
-          <td>#1002</td>
-          <td>B002</td>
-          <td>U456</td>
-          <td>Jane Smith</td>
-          <td>2025-08-11</td>
-          <td>10:20</td>
-          <td>
-            <select class="select">
-              <option>On the way</option>
-              <option>Delivered</option>
-              <option>Pending</option>
-            </select>
-          </td>
+          <td colspan="3" class="empty">No users found.</td>
         </tr>
+        }
       </tbody>
     </table>
   </section>
+
+  <!-- Orders Management -->
+  <div class="page topMargin">
+    <h2 class="page-title">Orders</h2>
+
+    <!-- Orders Table -->
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order ID</th>
+          <th>User ID</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Payment</th>
+          <th>Placed At</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let order of orders; let i = index">
+          <!-- Serial Number -->
+          <td class="text-center">{{ i + 1 }}</td>
+
+          <!-- Order ID -->
+          <td>{{ order.orderId }}</td>
+
+          <!-- User ID -->
+          <td>{{ order.userId }}</td>
+
+          <!-- Items -->
+          <td>
+            <ul class="order-items">
+              <li *ngFor="let item of order.items">
+                {{ item.title }} (x{{ item.quantity }}) – ₹{{ item.price }}
+              </li>
+            </ul>
+          </td>
+
+          <!-- Total Amount -->
+          <td>₹{{ order.totalAmount }}</td>
+
+          <!-- Status with colored select -->
+          <td>
+            <select
+              class="select status {{ order.status }}"
+              [(ngModel)]="order.status"
+            >
+              <option value="PENDING">Pending</option>
+              <option value="PLACED">Placed</option>
+              <option value="SHIPPED">Shipped</option>
+              <option value="DELIVERED">Delivered</option>
+              <!-- <option value="CANCELLED">Cancelled</option>
+              <option value="RETURNED">Returned</option> -->
+            </select>
+          </td>
+
+          <!-- Payment Info -->
+          <td>
+            {{ order.paymentMethod }} <br />
+            <span class="payment {{ order.paymentStatus }}">
+              {{ order.paymentStatus }}
+            </span>
+          </td>
+
+          <!-- Placed At -->
+        <td>{{ order.placedAt | date: "dd-MM-yyyy" }}</td>
+
+
+        </tr>
+
+        <!-- Empty State -->
+        <tr *ngIf="orders.length === 0">
+          <td colspan="8" class="empty">No orders found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   } @else {
   <!-- USER VIEW -->

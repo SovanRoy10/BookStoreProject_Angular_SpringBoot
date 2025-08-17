@@ -35,5 +35,11 @@ export class OrderService {
     return this.http.get("https://dummyjson.com/c/354a-20d2-4735-8059");
     // return this.http.get("reports/sales");
   }
+
+  // inventory reporting
+  getInventoryReporting(): Observable<any>{
+    return this.http.get("https://dummyjson.com/c/1b47-a44b-4608-9925");
+    // return this.http.get("reports/inventory")
+  }
   
 }

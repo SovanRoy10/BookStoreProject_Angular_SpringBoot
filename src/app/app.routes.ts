@@ -18,7 +18,7 @@ import { AuthGuard } from './auth-guard';
 // Analytics
 import { Analytics } from './pages/analytics/analytics';
 import { SalesReportComponent } from './shared/sales-report/sales-report';
-// import { InventoryReportComponent } from './shared/inventory-report/inventory-report';
+import { InventoryReport } from './shared/inventory-report/inventory-report';
 // import { CustomerBehaviorComponent } from './shared/customer-behavior/customer-behavior';
 // import { RevenueTrackingComponent } from './shared/revenue-tracking/revenue-tracking';
 
@@ -46,7 +46,7 @@ export const routes: Routes = [
   // Analytics Dashboard + Reports
   { path: 'admin/analytics', component: Analytics, canActivate: [AuthGuard] },
   { path: 'admin/analytics/sales-report', component: SalesReportComponent, canActivate: [AuthGuard] },
-  // { path: 'admin/analytics/inventory-report', component: InventoryReportComponent, canActivate: [AuthGuard] },
+  { path: 'admin/analytics/inventory-report', component: InventoryReport, canActivate: [AuthGuard] },
   // { path: 'admin/analytics/customer-behavior', component: CustomerBehaviorComponent, canActivate: [AuthGuard] },
   // { path: 'admin/analytics/revenue-tracking', component: RevenueTrackingComponent, canActivate: [AuthGuard] },
 

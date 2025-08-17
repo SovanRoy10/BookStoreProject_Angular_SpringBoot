@@ -65,8 +65,11 @@ export class BookService {
   bulkUploadBooks(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post(`${this.apiUrl}/bulk-upload`, formData);
+    
+    return this.http.post(`https://dummyjson.com/c/2316-ec07-4908-a71c`, formData);
   }
+
+
 
   // SEARCH methods
   searchBooksByTitle(title: string): Observable<any> {

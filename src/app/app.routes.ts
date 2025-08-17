@@ -14,6 +14,7 @@ import { AddBook } from './pages/admin/add-book/add-book';
 import { LowStocks } from './pages/admin/low-stocks/low-stocks';
 import { StatsComponent } from './pages/admin/stats/stats';
 import { AuthGuard } from './auth-guard';
+import { Analytics } from './pages/analytics/analytics';
 
 export const routes: Routes = [
  { path: '', component: Home },
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'admin/add-book', component: AddBook, canActivate: [AuthGuard] },
   { path: 'admin/books/low-stock', component: LowStocks, canActivate: [AuthGuard] },
   { path: 'admin/stats', component: StatsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/analytics', component: Analytics, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

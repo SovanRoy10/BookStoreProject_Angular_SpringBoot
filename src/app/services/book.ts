@@ -114,6 +114,12 @@ getReviewsUsingBookId(id: number | string) {
     return this.http.post(`https://dummyjson.com/c/0305-ed6c-4b8b-aaad`, reviewData);
   }
 
+  // delete review for a particular book
+  deleteReview(id: string): Observable<any> {
+    // return this.http.post(`reviews/delete/${id}`);
+    return this.http.delete(`https://dummyjson.com/c/c15e-106c-449b-8550`);
+  }
+
 }
 
 // /api/books/search?title=book_name: 
@@ -138,7 +144,7 @@ getReviewsUsingBookId(id: number | string) {
 // name update : password required
 // password update : password old required
 
-// user statistics api/auth/admin/get/stats
+// user statistics api/auth/admin/get/stats ✅
 // admin: user count, admin count, customer count , recent user top 5 
 
 

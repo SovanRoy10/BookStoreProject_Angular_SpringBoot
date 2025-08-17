@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 interface Review {
   id: number;
+  userEmail: string;
   name: string;
   rating: number;
   date: string;
@@ -41,8 +42,9 @@ export class BookDetail implements OnInit {
 
     // Simulated logged-in user
     this.user = {
+      email: 'sovan@bookstore.com', // from JWT
       name: 'Sovan Roy',
-      orderHistory: [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      orderHistory: [2, 3, 4, 12],
     };
 
     window.scrollTo(0, 0);
@@ -74,6 +76,7 @@ export class BookDetail implements OnInit {
       next: (data: any[]) => {
         this.reviews = data.map((r) => ({
           id: r.reviewId,
+          userEmail: r.user?.email, // ✅ store email
           name: r.user?.name || 'Anonymous',
           rating: r.rating,
           date: new Date(r.reviewDate).toISOString().slice(0, 10),
@@ -94,58 +97,85 @@ export class BookDetail implements OnInit {
     ).toFixed(1);
   }
 
- handleSubmitReview() {
-  this.error = '';
-  this.success = '';
+  handleSubmitReview() {
+    this.error = '';
+    this.success = '';
 
-  if (!this.user.orderHistory.includes(this.book.id)) {
-    this.error = 'You can only review books you have purchased.';
-    return;
+    if (!this.user.orderHistory.includes(this.book.id)) {
+      this.error = 'You can only review books you have purchased.';
+      return;
+    }
+
+    if (this.hasUserReviewed()) {
+      this.error = 'You have already reviewed this book.';
+      return;
+    }
+
+    if (this.newComment.trim() === '') {
+      this.error = 'Please enter a comment.';
+      return;
+    }
+
+    if (isNaN(this.newRating) || this.newRating < 0.5 || this.newRating > 5) {
+      this.error = 'Rating must be between 0.5 and 5.';
+      return;
+    }
+
+    // ✅ Frontend Review Object (for UI)
+    const newReview: Review = {
+      id: this.reviews.length + 1,
+      userEmail: this.user.email,
+      name: this.user.name,
+      rating: this.newRating,
+      date: new Date().toISOString().slice(0, 10),
+      comment: this.newComment.trim(),
+    };
+
+    // Prepend to UI
+    this.reviews = [newReview, ...this.reviews];
+
+    // ✅ API Payload (as backend expects)
+    const payload = {
+      rating: this.newRating,
+      coment: this.newComment.trim(), // spelling matches backend
+    };
+
+    // Call API
+    this.bookService.addReview(payload, this.book.id).subscribe({
+      next: () => {
+        Swal.fire('Success!', 'Your review has been added.', 'success');
+        this.newComment = '';
+        this.newRating = 5;
+      },
+      error: () => Swal.fire('Error!', 'Failed to save review', 'error'),
+    });
   }
 
-  if (this.newComment.trim() === '') {
-    this.error = 'Please enter a comment.';
-    return;
+  deleteReview(review: Review) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete your review?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Call API to delete review
+        this.bookService.deleteReview(this.id).subscribe({
+          next: () => {
+            this.reviews = this.reviews.filter((r) => r.id !== review.id);
+            Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
+          },
+          error: () => {
+            Swal.fire('Error!', 'Failed to delete review.', 'error');
+          },
+        });
+      }
+    });
   }
 
-  if (isNaN(this.newRating) || this.newRating < 0.5 || this.newRating > 5) {
-    this.error = 'Rating must be between 0.5 and 5.';
-    return;
+  hasUserReviewed(): boolean {
+    return this.reviews.some((r) => r.userEmail === this.user.email);
   }
-
-  const newReview: Review = {
-    id: this.reviews.length + 1,
-    name: this.user.name,
-    rating: this.newRating,
-    date: new Date().toISOString().slice(0, 10),
-    comment: this.newComment.trim(),
-  };
-
-  Swal.fire({
-    icon: 'info',
-    title: 'Submitting Review...',
-    allowOutsideClick: false,
-    didOpen: () => Swal.showLoading(),
-  });
-
-  // ✅ Call service
-  this.bookService.addReview(newReview, this.book.id).subscribe({
-    next: (res) => {
-      // Update UI with new review
-      this.reviews = [newReview, ...this.reviews];
-
-      // Reset form
-      this.newComment = '';
-      this.newRating = 5;
-
-      Swal.fire('Success!', 'Your review has been added.', 'success');
-      console.log('✅ Review saved on server:', res);
-    },
-    error: (err) => {
-      Swal.fire('Error!', 'Failed to save review', 'error');
-      console.error('❌ Review save error:', err);
-    },
-  });
-}
-
 }

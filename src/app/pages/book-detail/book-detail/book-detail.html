@@ -63,6 +63,7 @@
     </div>
 
     <!-- Existing Reviews -->
+    <!-- Existing Reviews -->
     <div *ngFor="let review of reviews" class="review">
       <p class="review-header">
         {{ review.name }} – {{ review.rating }}
@@ -70,6 +71,15 @@
       </p>
       <p class="review-date">{{ review.date }}</p>
       <p>{{ review.comment }}</p>
+
+      <!-- ✅ Show delete button only if review belongs to logged-in user -->
+      <button
+        *ngIf="review.userEmail === user.email"
+        (click)="deleteReview(review)"
+        class="delete-btn"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </div>

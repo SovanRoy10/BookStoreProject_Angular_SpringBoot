@@ -13,7 +13,8 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   getCart(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    // return this.http.get(this.apiUrl);
+    return this.http.get(`https://dummyjson.com/c/3b79-4674-48cd-8b44`);
   }
 
   addToCart(bookId: string, quantity: number): Observable<any> {

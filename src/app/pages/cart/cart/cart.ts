@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../services/cart';
 
 interface CartItem {
-  id: number;
+  cartItemId: number;
+  bookId: number;
   title: string;
-  author: string;
   price: number;
   quantity: number;
-  image: string;
+  subtotal: number;
 }
 
 @Component({
-  imports :[CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   selector: 'app-cart',
   templateUrl: './cart.html',
   styleUrls: ['./cart.css']
@@ -22,41 +23,28 @@ export class Cart implements OnInit {
   cartItems: CartItem[] = [];
   total: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService: CartService) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.loadCart();
+  }
 
-    // Static cart items for now
-    this.cartItems = [
-      {
-        id: 1,
-        title: 'The Great Gatsby',
-        author: 'F. Scott Fitzgerald',
-        price: 299,
-        quantity: 1,
-        image: 'https://www.bookswagon.com/productimages/images200/862/9780190635862.jpg'
+  loadCart(): void {
+    this.cartService.getCart().subscribe({
+      next: (data) => {
+        this.cartItems = data.items || [];
+        this.total = data.grandTotal || 0;
       },
-      {
-        id: 2,
-        title: '1984',
-        author: 'George Orwell',
-        price: 280,
-        quantity: 2,
-        image: 'https://images-na.ssl-images-amazon.com/images/I/71kxa1-0mfL.jpg'
+      error: (err) => {
+        console.error('Failed to load cart', err);
       }
-    ];
-
-    this.calculateTotal();
+    });
   }
 
-  calculateTotal(): void {
-    this.total = this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  }
-
-  removeItem(id: number): void {
-    this.cartItems = this.cartItems.filter(item => item.id !== id);
-    this.calculateTotal();
+  removeItem(cartItemId: number): void {
+    this.cartItems = this.cartItems.filter(item => item.cartItemId !== cartItemId);
+    this.total = this.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
   }
 
   checkout(): void {

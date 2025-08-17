@@ -20,7 +20,7 @@ import { Analytics } from './pages/analytics/analytics';
 import { SalesReportComponent } from './shared/sales-report/sales-report';
 import { InventoryReport } from './shared/inventory-report/inventory-report';
 import { CustomerBehaviour } from './shared/customer-behaviour/customer-behaviour';
-// import { RevenueTrackingComponent } from './shared/revenue-tracking/revenue-tracking';
+import { RevenueTracking } from './shared/revenue-tracking/revenue-tracking';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -48,7 +48,7 @@ export const routes: Routes = [
   { path: 'admin/analytics/sales-report', component: SalesReportComponent, canActivate: [AuthGuard] },
   { path: 'admin/analytics/inventory-report', component: InventoryReport, canActivate: [AuthGuard] },
   { path: 'admin/analytics/customer-behavior', component: CustomerBehaviour, canActivate: [AuthGuard] },
-  // { path: 'admin/analytics/revenue-tracking', component: RevenueTrackingComponent, canActivate: [AuthGuard] },
+  { path: 'admin/analytics/revenue-tracking', component: RevenueTracking, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

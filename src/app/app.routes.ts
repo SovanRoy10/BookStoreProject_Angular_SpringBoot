@@ -14,10 +14,16 @@ import { AddBook } from './pages/admin/add-book/add-book';
 import { LowStocks } from './pages/admin/low-stocks/low-stocks';
 import { StatsComponent } from './pages/admin/stats/stats';
 import { AuthGuard } from './auth-guard';
+
+// Analytics
 import { Analytics } from './pages/analytics/analytics';
+import { SalesReportComponent } from './shared/sales-report/sales-report';
+// import { InventoryReportComponent } from './shared/inventory-report/inventory-report';
+// import { CustomerBehaviorComponent } from './shared/customer-behavior/customer-behavior';
+// import { RevenueTrackingComponent } from './shared/revenue-tracking/revenue-tracking';
 
 export const routes: Routes = [
- { path: '', component: Home },
+  { path: '', component: Home },
   { path: 'book/:id', component: BookDetail },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
@@ -36,7 +42,13 @@ export const routes: Routes = [
   { path: 'admin/add-book', component: AddBook, canActivate: [AuthGuard] },
   { path: 'admin/books/low-stock', component: LowStocks, canActivate: [AuthGuard] },
   { path: 'admin/stats', component: StatsComponent, canActivate: [AuthGuard] },
+
+  // Analytics Dashboard + Reports
   { path: 'admin/analytics', component: Analytics, canActivate: [AuthGuard] },
+  { path: 'admin/analytics/sales-report', component: SalesReportComponent, canActivate: [AuthGuard] },
+  // { path: 'admin/analytics/inventory-report', component: InventoryReportComponent, canActivate: [AuthGuard] },
+  // { path: 'admin/analytics/customer-behavior', component: CustomerBehaviorComponent, canActivate: [AuthGuard] },
+  // { path: 'admin/analytics/revenue-tracking', component: RevenueTrackingComponent, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -108,6 +108,12 @@ getReviewsUsingBookId(id: number | string) {
   return this.http.get<any[]>(`https://dummyjson.com/c/0705-4faa-4ed0-abdb`);
 }
 
+  // POST add a new review
+  addReview(reviewData: any, id: string): Observable<any> {
+    // return this.http.post(`reviews/add/${id}`, bookData);
+    return this.http.post(`https://dummyjson.com/c/0305-ed6c-4b8b-aaad`, reviewData);
+  }
+
 }
 
 // /api/books/search?title=book_name: 

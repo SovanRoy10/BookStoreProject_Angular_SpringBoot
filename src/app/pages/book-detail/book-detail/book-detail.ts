@@ -94,41 +94,58 @@ export class BookDetail implements OnInit {
     ).toFixed(1);
   }
 
-  handleSubmitReview() {
-    this.error = '';
-    this.success = '';
+ handleSubmitReview() {
+  this.error = '';
+  this.success = '';
 
-    if (!this.user.orderHistory.includes(this.book.id)) {
-      this.error = 'You can only review books you have purchased.';
-      return;
-    }
-
-    if (this.newComment.trim() === '') {
-      this.error = 'Please enter a comment.';
-      return;
-    }
-
-    if (isNaN(this.newRating) || this.newRating < 0.5 || this.newRating > 5) {
-      this.error = 'Rating must be between 0.5 and 5.';
-      return;
-    }
-
-    const newReview: Review = {
-      id: this.reviews.length + 1,
-      name: this.user.name,
-      rating: this.newRating,
-      date: new Date().toISOString().slice(0, 10),
-      comment: this.newComment.trim(),
-    };
-
-    // Prepend review to UI
-    this.reviews = [newReview, ...this.reviews];
-
-    // Reset form
-    this.newComment = '';
-    this.newRating = 5;
-
-    this.success = 'Review added successfully!';
-    Swal.fire('Success!', 'Your review has been added.', 'success');
+  if (!this.user.orderHistory.includes(this.book.id)) {
+    this.error = 'You can only review books you have purchased.';
+    return;
   }
+
+  if (this.newComment.trim() === '') {
+    this.error = 'Please enter a comment.';
+    return;
+  }
+
+  if (isNaN(this.newRating) || this.newRating < 0.5 || this.newRating > 5) {
+    this.error = 'Rating must be between 0.5 and 5.';
+    return;
+  }
+
+  const newReview: Review = {
+    id: this.reviews.length + 1,
+    name: this.user.name,
+    rating: this.newRating,
+    date: new Date().toISOString().slice(0, 10),
+    comment: this.newComment.trim(),
+  };
+
+  Swal.fire({
+    icon: 'info',
+    title: 'Submitting Review...',
+    allowOutsideClick: false,
+    didOpen: () => Swal.showLoading(),
+  });
+
+  // ✅ Call service
+  this.bookService.addReview(newReview, this.book.id).subscribe({
+    next: (res) => {
+      // Update UI with new review
+      this.reviews = [newReview, ...this.reviews];
+
+      // Reset form
+      this.newComment = '';
+      this.newRating = 5;
+
+      Swal.fire('Success!', 'Your review has been added.', 'success');
+      console.log('✅ Review saved on server:', res);
+    },
+    error: (err) => {
+      Swal.fire('Error!', 'Failed to save review', 'error');
+      console.error('❌ Review save error:', err);
+    },
+  });
+}
+
 }

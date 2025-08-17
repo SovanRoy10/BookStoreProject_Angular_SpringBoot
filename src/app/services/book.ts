@@ -131,7 +131,7 @@ getReviewsUsingBookId(id: number | string) {
 // /search?minPrice=price&maxPrice=asc  ✅
 // /api/books/search?available=true   ✅
 
-// placed,shift,cancelled,delivered,return
+// placed,shift,cancelled,delivered,return,pending
 
 // order id same , multiple product
 
@@ -140,9 +140,6 @@ getReviewsUsingBookId(id: number | string) {
 // make changes in order history table in profile, after clicking the order id , another page open consisting that orders
 // where I have the return option
 
-// profile management
-// name update : password required
-// password update : password old required
 
 // user statistics api/auth/admin/get/stats ✅
 // admin: user count, admin count, customer count , recent user top 5 

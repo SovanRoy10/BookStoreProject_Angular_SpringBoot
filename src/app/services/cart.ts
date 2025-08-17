@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class Cart {
+export class CartService {
   private apiUrl = 'https://api.example.com/cart'; // change to your API
   private cartItems = new BehaviorSubject<any[]>([]);
   cartItems$ = this.cartItems.asObservable();
@@ -17,7 +17,8 @@ export class Cart {
   }
 
   addToCart(bookId: string, quantity: number): Observable<any> {
-    return this.http.post(this.apiUrl, { bookId, quantity });
+    // return this.http.post(this.apiUrl, { bookId, quantity });
+    return this.http.post("https://dummyjson.com/c/64f3-f1ad-4174-b01f",{bookId,quantity});
   }
 
   removeFromCart(itemId: string): Observable<any> {

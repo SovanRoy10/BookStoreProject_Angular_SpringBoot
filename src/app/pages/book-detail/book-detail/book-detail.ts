@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../../services/book';
 import Swal from 'sweetalert2';
+import { CartService } from '../../../services/cart';
 
 interface Review {
   id: number;
@@ -30,9 +31,12 @@ export class BookDetail implements OnInit {
   error: string = '';
   success: string = '';
 
+  quantity: number = 1; // ✅ default quantity
+
   constructor(
     private route: ActivatedRoute,
-    private bookService: BookService
+    private bookService: BookService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +64,7 @@ export class BookDetail implements OnInit {
     this.bookService.getBookById(this.id).subscribe({
       next: (data) => {
         this.book = data;
+        console.log(data)
         console.log('📘 Book ID:', this.book.id);
         console.log('🛒 User orderHistory:', this.user?.orderHistory);
         Swal.close();
@@ -177,5 +182,29 @@ export class BookDetail implements OnInit {
 
   hasUserReviewed(): boolean {
     return this.reviews.some((r) => r.userEmail === this.user.email);
+  }
+
+  // ✅ Add to cart function
+  handleAddToCart() {
+    if (!this.book) return;
+
+
+    if (this.quantity < 1 || this.quantity > this.book.stockQuantity) {
+      Swal.fire('Error!', 'Please enter a valid quantity.', 'error');
+      return;
+    }
+
+    this.cartService.addToCart(this.book.id, this.quantity).subscribe({
+      next: () => {
+        Swal.fire(
+          'Added!',
+          `${this.quantity} × "${this.book.title}" added to cart.`,
+          'success'
+        );
+      },
+      error: () => {
+        Swal.fire('Error!', 'Failed to add to cart.', 'error');
+      },
+    });
   }
 }

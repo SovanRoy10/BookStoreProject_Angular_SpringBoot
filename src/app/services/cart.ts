@@ -22,15 +22,19 @@ export class CartService {
     return this.http.post("https://dummyjson.com/c/64f3-f1ad-4174-b01f",{bookId,quantity});
   }
 
-  removeFromCart(itemId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${itemId}`);
+  removeFromCart(itemId: number): Observable<any> {
+    // return this.http.delete(`${this.apiUrl}/${itemId}`);
+    return this.http.delete(`https://dummyjson.com/c/797b-216e-47af-a18d`);
   }
 
   clearCart(): Observable<any> {
-    return this.http.delete(this.apiUrl);
+    // return this.http.delete(this.apiUrl);
+    return this.http.delete("https://dummyjson.com/c/e6f2-a7a1-4be0-94ce");
   }
 
-  updateCartState(items: any[]) {
-    this.cartItems.next(items);
-  }
+ updateCartState(payload: { cartItemId: number; quantity: number }) {
+  // return this.http.put("http://localhost:8080/api/cart/update", payload);
+  return this.http.put("https://dummyjson.com/c/592d-aa67-4eca-9db0", payload);
+}
+
 }

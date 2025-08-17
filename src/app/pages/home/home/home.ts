@@ -294,4 +294,26 @@ loadOrders() {
     },
   });
 }
+
+updateStatus(orderId: number, newStatus: string) {
+    this.orderService.updateOrderStatus(orderId, newStatus).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated!',
+          text: `Order #${orderId} marked as ${newStatus}.`,
+          timer: 2000,
+          showConfirmButton: false
+        });
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Could not update order status. Please try again.',
+        });
+      }
+    });
+  }
+
 }

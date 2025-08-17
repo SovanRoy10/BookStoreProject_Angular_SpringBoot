@@ -23,5 +23,11 @@ export class OrderService {
   getOrdersAdmin(): Observable<any> {
     return this.http.get("https://dummyjson.com/c/763a-8097-4bb8-95be");
   }
+
+  //  Update order status
+  updateOrderStatus(orderId: number, status: string): Observable<any> {
+    // return this.http.put(`${this.apiUrl}/${orderId}/status`, { status });
+    return this.http.put(`https://dummyjson.com/c/3bb8-537c-458e-9630`, { status });
+  }
   
 }

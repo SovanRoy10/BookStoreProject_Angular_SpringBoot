@@ -160,6 +160,7 @@
             <select
               class="select status {{ order.status }}"
               [(ngModel)]="order.status"
+               (change)="updateStatus(order.orderId, order.status)"
             >
               <option value="PENDING">Pending</option>
               <option value="PLACED">Placed</option>

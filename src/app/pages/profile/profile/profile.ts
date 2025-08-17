@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user';
 import { OrderService } from '../../../services/order';
-import { Auth } from '../../../services/auth';   // ✅ import Auth service
+import { Auth } from '../../../services/auth'; // ✅ import Auth service
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,26 +12,29 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './profile.html',
   styleUrls: ['./profile.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule],
 })
 export class Profile implements OnInit {
   user: any = null;
-  isAdmin = false;
 
   name: string = '';
   email: string = '';
   role: string = '';
   avatar: string = '';
-  password: string = '';      
-  oldPassword: string = '';   
+  password: string = '';
+  oldPassword: string = '';
 
-  orders: any[] = [];   
+  orders: any[] = [];
+
+  get isAdmin(): boolean {
+    return this.authService.getUserRole() === 'ADMIN';
+  }
 
   constructor(
     private userService: UserService,
     private orderService: OrderService,
-    private authService: Auth,          // ✅ inject Auth
-    private router: Router              // ✅ inject Router
+    private authService: Auth, // ✅ inject Auth
+    private router: Router // ✅ inject Router
   ) {}
 
   ngOnInit() {
@@ -47,7 +50,6 @@ export class Profile implements OnInit {
         this.name = data.name;
         this.email = data.email;
         this.role = data.role;
-        this.isAdmin = data.role === 'ADMIN';
 
         this.avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
           data.name
@@ -56,7 +58,7 @@ export class Profile implements OnInit {
       error: (err) => {
         Swal.fire('Error!', 'Failed to load profile', 'error');
         console.error('Profile load error:', err);
-      }
+      },
     });
   }
 
@@ -68,13 +70,17 @@ export class Profile implements OnInit {
       error: (err) => {
         Swal.fire('Error!', 'Failed to load orders', 'error');
         console.error('Orders load error:', err);
-      }
+      },
     });
   }
 
   handleSave() {
     if (!this.oldPassword.trim()) {
-      Swal.fire('Error!', 'Old password is required to update profile.', 'error');
+      Swal.fire(
+        'Error!',
+        'Old password is required to update profile.',
+        'error'
+      );
       return;
     }
 
@@ -92,7 +98,7 @@ export class Profile implements OnInit {
       icon: 'info',
       title: 'Saving...',
       allowOutsideClick: false,
-      didOpen: () => Swal.showLoading()
+      didOpen: () => Swal.showLoading(),
     });
 
     this.userService.updateUserProfile(updatedData).subscribe({
@@ -105,7 +111,7 @@ export class Profile implements OnInit {
       error: (err) => {
         Swal.fire('Error!', 'Failed to update profile', 'error');
         console.error('Profile update error:', err);
-      }
+      },
     });
   }
 
@@ -117,10 +123,10 @@ export class Profile implements OnInit {
       text: 'You will be logged out of your account.',
       showCancelButton: true,
       confirmButtonText: 'Logout',
-      cancelButtonText: 'Cancel'
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.authService.logout();      // clear tokens
+        this.authService.logout(); // clear tokens
         this.router.navigate(['/login']); // redirect to login page
         Swal.fire('Logged out!', 'You have been logged out.', 'success');
       }

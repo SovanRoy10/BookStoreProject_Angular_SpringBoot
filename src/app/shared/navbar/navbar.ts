@@ -14,7 +14,7 @@ import { Auth } from '../../services/auth';
 })
 export class Navbar {
   // isLoggedIn = false; // Replace with AuthService later
-  isAdmin = false; // Replace with actual role check later
+
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();

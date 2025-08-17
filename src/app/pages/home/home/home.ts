@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../../services/book'; 
 import { UserService } from '../../../services/user';
+import { Auth } from '../../../services/auth';
 
 export interface Book {
   id: number;
@@ -50,9 +51,22 @@ export class Home {
   ) {
     throw new Error('Method not implemented.');
   }
-  isAdmin = false; // toggle for admin/user view
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get userRole(): string | null {
+    return this.authService.getUserRole();
+  }
+
 
   books: Book[] = [];
+
+  get isAdmin(): boolean {
+  return this.authService.getUserRole() === 'ADMIN';
+}
+
 
 
   lowStockBooks: Book[] = [];
@@ -62,7 +76,7 @@ export class Home {
 
   searchResults: any[] = [];
 
-  constructor(private router: Router, private bookService: BookService,private  userService : UserService) {}
+  constructor(private router: Router, private bookService: BookService,private  userService : UserService,private authService: Auth) {}
 
   private async confirmAction(
     title: string,

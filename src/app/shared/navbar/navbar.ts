@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BookService } from '../../services/book';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -12,15 +13,21 @@ import { BookService } from '../../services/book';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  isLoggedIn = true; // Replace with AuthService later
-  cartCount = 1; // Replace with CartService later
+  // isLoggedIn = false; // Replace with AuthService later
   isAdmin = false; // Replace with actual role check later
 
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get userRole(): string | null {
+    return this.authService.getUserRole();
+  }
 
   searchType = 'title';
   searchQuery = '';
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private authService: Auth) {}
 
   onSearch() {
     if (this.searchQuery.trim()) {

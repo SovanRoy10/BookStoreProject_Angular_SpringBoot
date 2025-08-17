@@ -13,21 +13,28 @@ import { EditBooks } from './pages/admin/edit-books/edit-books';
 import { AddBook } from './pages/admin/add-book/add-book';
 import { LowStocks } from './pages/admin/low-stocks/low-stocks';
 import { StatsComponent } from './pages/admin/stats/stats';
+import { AuthGuard } from './auth-guard';
 
 export const routes: Routes = [
-  { path: '', component: Home },
+ { path: '', component: Home },
   { path: 'book/:id', component: BookDetail },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'cart', component: Cart },
-  { path: 'profile', component: Profile },
+
+  // Protected for logged-in users
+  { path: 'cart', component: Cart, canActivate: [AuthGuard] },
+  { path: 'profile', component: Profile, canActivate: [AuthGuard] },
+
+  // Books
   { path: 'books/all', component: AllBooks },
   { path: 'books/recommended', component: RecommendedBooks },
   { path: 'books/trending', component: TrendingBooks },
-  
-  { path: 'admin/edit-book/:id', component: EditBooks },
-  { path: 'admin/add-book', component: AddBook },
-  { path: 'admin/books/low-stock', component: LowStocks },
-  { path: 'admin/stats', component: StatsComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // wildcard route
+
+  // Admin (role based)
+  { path: 'admin/edit-book/:id', component: EditBooks, canActivate: [AuthGuard]},
+  { path: 'admin/add-book', component: AddBook, canActivate: [AuthGuard] },
+  { path: 'admin/books/low-stock', component: LowStocks, canActivate: [AuthGuard] },
+  { path: 'admin/stats', component: StatsComponent, canActivate: [AuthGuard] },
+
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

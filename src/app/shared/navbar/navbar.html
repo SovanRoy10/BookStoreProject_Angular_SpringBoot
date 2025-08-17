@@ -30,11 +30,9 @@
     </a>
 
     <!-- Hide cart if user is admin -->
-    @if (!isAdmin) {
+    @if (!(userRole === 'ADMIN')) {
     <a routerLink="/cart" class="cart-link">
-      🛒 @if (cartCount > 0) {
-      <span class="cart-count">{{ cartCount }}</span>
-      }
+      🛒 
     </a>
     }
   </div>

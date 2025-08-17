@@ -86,27 +86,3 @@
   margin-right: 4px;
 }
 
-.cart-count {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: linear-gradient(135deg, #ff4d4f, #d9363e);
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  border: 1px solid white;
-  min-width: 18px;
-  min-height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease-in-out, background 0.3s ease;
-} 
-
-.cart-count:hover {
-  transform: scale(1.15);
-  background: linear-gradient(135deg, #ff6666, #e0434a);
-}

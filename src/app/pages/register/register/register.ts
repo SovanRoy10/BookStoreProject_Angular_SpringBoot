@@ -38,6 +38,11 @@ export class Register {
     this.authService.register(this.formData).subscribe({
       next: (res) => {
         this.authService.saveTokens(res.accessToken, res.refreshToken);
+        localStorage.setItem('user', JSON.stringify({
+            name: res.name,
+            email: res.email,
+            role: res.role
+          }));
 
         Swal.fire('✅ Success', res.message || 'Registration successful', 'success');
 

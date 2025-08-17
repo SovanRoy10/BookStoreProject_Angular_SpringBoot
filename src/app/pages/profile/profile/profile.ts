@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserService } from '../../../services/user';
 import { OrderService } from '../../../services/order';
+import { Auth } from '../../../services/auth';   // ✅ import Auth service
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -20,14 +22,16 @@ export class Profile implements OnInit {
   email: string = '';
   role: string = '';
   avatar: string = '';
-  password: string = '';      // new password
-  oldPassword: string = '';   // required field
+  password: string = '';      
+  oldPassword: string = '';   
 
-  orders: any[] = [];   // will hold API response
+  orders: any[] = [];   
 
   constructor(
     private userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private authService: Auth,          // ✅ inject Auth
+    private router: Router              // ✅ inject Router
   ) {}
 
   ngOnInit() {
@@ -59,7 +63,7 @@ export class Profile implements OnInit {
   loadOrders() {
     this.orderService.getOrders().subscribe({
       next: (data) => {
-        this.orders = data; // assign directly
+        this.orders = data;
       },
       error: (err) => {
         Swal.fire('Error!', 'Failed to load orders', 'error');
@@ -101,6 +105,24 @@ export class Profile implements OnInit {
       error: (err) => {
         Swal.fire('Error!', 'Failed to update profile', 'error');
         console.error('Profile update error:', err);
+      }
+    });
+  }
+
+  // ✅ Logout method
+  handleLogout() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: 'You will be logged out of your account.',
+      showCancelButton: true,
+      confirmButtonText: 'Logout',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.logout();      // clear tokens
+        this.router.navigate(['/login']); // redirect to login page
+        Swal.fire('Logged out!', 'You have been logged out.', 'success');
       }
     });
   }

@@ -41,5 +41,11 @@ export class OrderService {
     return this.http.get("https://dummyjson.com/c/1b47-a44b-4608-9925");
     // return this.http.get("reports/inventory")
   }
+
+  // customer trends
+  getCustomerBehavior(): Observable<any>{
+    return this.http.get("https://dummyjson.com/c/046f-372c-4ddd-beb0");
+    // return this.http.get("reports/customer-behavior)
+  }
   
 }

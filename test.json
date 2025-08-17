@@ -1,242 +1,400 @@
 {
-  "bestsellers": [
+  "customerInsights": [
     {
-      "bookId": 24,
-      "title": "Becoming",
-      "author": "Michelle Obama",
-      "stockQuantity": 6
+      "name": "Customer A Updated",
+      "email": "customerA@bookstore.com",
+      "totalOrders": 2,
+      "totalSpent": 15898,
+      "averageOrderValue": 7949,
+      "purchaseFrequency": "Every 0 days",
+      "preferredCategories": [
+        "Biography",
+        "Philosophy"
+      ],
+      "monthlySpending": {
+        "2025-08": 15898
+      },
+      "isRepeatCustomer": true
     },
     {
-      "bookId": 25,
-      "title": "Educated",
-      "author": "Tara Westover",
-      "stockQuantity": 0
+      "name": "Priti Mondal",
+      "email": "pssm2090@gmail.com",
+      "totalOrders": 1,
+      "totalSpent": 2990,
+      "averageOrderValue": 2990,
+      "purchaseFrequency": "Only 1 order",
+      "preferredCategories": [
+        "Philosophy"
+      ],
+      "monthlySpending": {
+        "2025-08": 2990
+      },
+      "isRepeatCustomer": false
     },
     {
-      "bookId": 26,
-      "title": "Ikigai",
-      "author": "Héctor García",
-      "stockQuantity": 13
-    },
-    {
-      "bookId": 28,
-      "title": "Rich Dad Poor Dad",
-      "author": "Robert T. Kiyosaki",
-      "stockQuantity": 26
-    },
-    {
-      "bookId": 30,
-      "title": "The Book Thief",
-      "author": "Markus Zusak",
-      "stockQuantity": 27
+      "name": "Sovan Roy",
+      "email": "sovan@bookstore.com",
+      "totalOrders": 2,
+      "totalSpent": 1990,
+      "averageOrderValue": 995,
+      "purchaseFrequency": "Every 0 days",
+      "preferredCategories": [
+        "Finance",
+        "Fiction"
+      ],
+      "monthlySpending": {
+        "2025-08": 1990
+      },
+      "isRepeatCustomer": true
     }
   ],
-  "outOfStock": [
+  "mostActiveCustomers": [
     {
-      "bookId": 25,
-      "title": "Educated",
-      "author": "Tara Westover",
-      "stockQuantity": 0
+      "email": "customerA@bookstore.com",
+      "totalOrders": 2,
+      "totalSpent": 15898
+    },
+    {
+      "email": "pssm2090@gmail.com",
+      "totalOrders": 1,
+      "totalSpent": 2990
+    },
+    {
+      "email": "sovan@bookstore.com",
+      "totalOrders": 2,
+      "totalSpent": 1990
     }
   ],
-  "lowStock": [
-    {
-      "bookId": 25,
-      "title": "Educated",
-      "author": "Tara Westover",
-      "stockQuantity": 0
-    },
-    {
-      "bookId": 55,
-      "title": "Mule in Action",
-      "author": "David Dossot",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 70,
-      "title": "Grails in Action",
-      "author": "Glen Smith",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 73,
-      "title": "PowerBuilder 6.0 Questions & Answers",
-      "author": "Tim Hatton",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 75,
-      "title": "The Awesome Power of Power++",
-      "author": "Tim Hatton",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 101,
-      "title": "JUnit in Action",
-      "author": "Vincent Massol with Ted Husted",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 117,
-      "title": "Lift in Action",
-      "author": "Timothy Perrett",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 125,
-      "title": "Swing",
-      "author": "Matthew Robinson",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 129,
-      "title": "The Cloud at Your Service",
-      "author": "Jothy Rosenberg",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 142,
-      "title": "JMX in Action",
-      "author": "Benjamin G. Sullins",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 145,
-      "title": "Bitter Java",
-      "author": "Bruce A. Tate",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 148,
-      "title": "iPhone and iPad in Action",
-      "author": "Brandon Trebitowski",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 164,
-      "title": "TCP/IP Programming for OS/2",
-      "author": "Steven J. Gutz",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 170,
-      "title": "Hadoop in Practice",
-      "author": "Alex Holmes",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 178,
-      "title": "Single Page Web Applications",
-      "author": "Michael S. Mikowski",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 191,
-      "title": "OCA Java SE 7 Programmer I Certification Guide",
-      "author": "Mala Gupta",
-      "stockQuantity": 1
-    },
-    {
-      "bookId": 223,
-      "title": "3D User Interfaces with Java 3D",
-      "author": "Jon Barrilleaux",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 224,
-      "title": "Hibernate in Action",
-      "author": "Christian Bauer",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 226,
-      "title": "iBATIS in Action",
-      "author": "Clinton Begin",
-      "stockQuantity": 1
-    },
-    {
-      "bookId": 235,
-      "title": "Spring Dynamic Modules in Action",
-      "author": "Arnaud Cogoluegnes",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 238,
-      "title": "GWT in Practice",
-      "author": "Robert Cooper",
-      "stockQuantity": 1
-    },
-    {
-      "bookId": 243,
-      "title": "Hello! HTML5 & CSS3",
-      "author": "Rob Crowther",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 250,
-      "title": "OSGi in Action",
-      "author": "Richard S. Hall",
-      "stockQuantity": 1
-    },
-    {
-      "bookId": 255,
-      "title": "Lucene in Action, Second Edition",
-      "author": "Erik Hatcher",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 262,
-      "title": "iOS 4 in Action",
-      "author": "Jocelyn Harrington",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 264,
-      "title": "Learn Windows PowerShell in a Month of Lunches",
-      "author": "Don Jones",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 267,
-      "title": "Continuous Integration in .NET",
-      "author": "Marcin Kawalerowicz",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 268,
-      "title": "Technology Paradise Lost",
-      "author": "Erik Keller",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 277,
-      "title": "SQR in PeopleSoft and Other Applications",
-      "author": "Galina",
-      "stockQuantity": 1
-    },
-    {
-      "bookId": 297,
-      "title": "ASP.NET MVC 4 in Action",
-      "author": "Jeffrey Palermo",
-      "stockQuantity": 3
-    },
-    {
-      "bookId": 298,
-      "title": "EJB 3 in Action",
-      "author": "Debu Panda",
-      "stockQuantity": 2
-    },
-    {
-      "bookId": 305,
-      "title": "Machine Learning in Action",
-      "author": "Peter Harrington",
-      "stockQuantity": 4
-    },
-    {
-      "bookId": 320,
-      "title": "Java Applets and Channels Without Programming",
-      "author": "Ronny Richardson",
-      "stockQuantity": 2
-    }
-  ]
+  "purchaseTrends": {
+    "monthlyTrends": [
+      [
+        "16-08-2025",
+        2,
+        15898
+      ],
+      [
+        "17-08-2025",
+        3,
+        4980
+      ]
+    ],
+    "dailyTrends": [
+      [
+        "2025-08-16",
+        2,
+        15898
+      ],
+      [
+        "2025-08-17",
+        3,
+        4980
+      ]
+    ],
+    "weeklyTrends": [
+      [
+        202532,
+        2,
+        15898
+      ],
+      [
+        202533,
+        3,
+        4980
+      ]
+    ],
+    "userTrends": [
+      [
+        "customerA@bookstore.com",
+        "2025-08-16",
+        2,
+        15898
+      ],
+      [
+        "pssm2090@gmail.com",
+        "2025-08-17",
+        1,
+        2990
+      ],
+      [
+        "sovan@bookstore.com",
+        "2025-08-17",
+        2,
+        1990
+      ]
+    ],
+    "bookTrends": [
+      [
+        "Educated",
+        "2025-08-16",
+        20
+      ],
+      [
+        "Becoming",
+        "2025-08-16",
+        12
+      ],
+      [
+        "Ikigai",
+        "2025-08-16",
+        2
+      ],
+      [
+        "Ikigai",
+        "2025-08-17",
+        10
+      ],
+      [
+        "Rich Dad Poor Dad",
+        "2025-08-17",
+        2
+      ],
+      [
+        "The Book Thief",
+        "2025-08-17",
+        3
+      ]
+    ]
+  },
+  "inventoryReport": {
+    "bestsellers": [
+      {
+        "bookId": 24,
+        "title": "Becoming",
+        "author": "Michelle Obama",
+        "stockQuantity": 6
+      },
+      {
+        "bookId": 25,
+        "title": "Educated",
+        "author": "Tara Westover",
+        "stockQuantity": 0
+      },
+      {
+        "bookId": 26,
+        "title": "Ikigai",
+        "author": "Héctor García",
+        "stockQuantity": 13
+      },
+      {
+        "bookId": 28,
+        "title": "Rich Dad Poor Dad",
+        "author": "Robert T. Kiyosaki",
+        "stockQuantity": 26
+      },
+      {
+        "bookId": 30,
+        "title": "The Book Thief",
+        "author": "Markus Zusak",
+        "stockQuantity": 27
+      }
+    ],
+    "outOfStock": [
+      {
+        "bookId": 25,
+        "title": "Educated",
+        "author": "Tara Westover",
+        "stockQuantity": 0
+      }
+    ],
+    "lowStock": [
+      {
+        "bookId": 25,
+        "title": "Educated",
+        "author": "Tara Westover",
+        "stockQuantity": 0
+      },
+      {
+        "bookId": 55,
+        "title": "Mule in Action",
+        "author": "David Dossot",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 70,
+        "title": "Grails in Action",
+        "author": "Glen Smith",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 73,
+        "title": "PowerBuilder 6.0 Questions & Answers",
+        "author": "Tim Hatton",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 75,
+        "title": "The Awesome Power of Power++",
+        "author": "Tim Hatton",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 101,
+        "title": "JUnit in Action",
+        "author": "Vincent Massol with Ted Husted",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 117,
+        "title": "Lift in Action",
+        "author": "Timothy Perrett",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 125,
+        "title": "Swing",
+        "author": "Matthew Robinson",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 129,
+        "title": "The Cloud at Your Service",
+        "author": "Jothy Rosenberg",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 142,
+        "title": "JMX in Action",
+        "author": "Benjamin G. Sullins",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 145,
+        "title": "Bitter Java",
+        "author": "Bruce A. Tate",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 148,
+        "title": "iPhone and iPad in Action",
+        "author": "Brandon Trebitowski",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 164,
+        "title": "TCP/IP Programming for OS/2",
+        "author": "Steven J. Gutz",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 170,
+        "title": "Hadoop in Practice",
+        "author": "Alex Holmes",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 178,
+        "title": "Single Page Web Applications",
+        "author": "Michael S. Mikowski",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 191,
+        "title": "OCA Java SE 7 Programmer I Certification Guide",
+        "author": "Mala Gupta",
+        "stockQuantity": 1
+      },
+      {
+        "bookId": 223,
+        "title": "3D User Interfaces with Java 3D",
+        "author": "Jon Barrilleaux",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 224,
+        "title": "Hibernate in Action",
+        "author": "Christian Bauer",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 226,
+        "title": "iBATIS in Action",
+        "author": "Clinton Begin",
+        "stockQuantity": 1
+      },
+      {
+        "bookId": 235,
+        "title": "Spring Dynamic Modules in Action",
+        "author": "Arnaud Cogoluegnes",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 238,
+        "title": "GWT in Practice",
+        "author": "Robert Cooper",
+        "stockQuantity": 1
+      },
+      {
+        "bookId": 243,
+        "title": "Hello! HTML5 & CSS3",
+        "author": "Rob Crowther",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 250,
+        "title": "OSGi in Action",
+        "author": "Richard S. Hall",
+        "stockQuantity": 1
+      },
+      {
+        "bookId": 255,
+        "title": "Lucene in Action, Second Edition",
+        "author": "Erik Hatcher",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 262,
+        "title": "iOS 4 in Action",
+        "author": "Jocelyn Harrington",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 264,
+        "title": "Learn Windows PowerShell in a Month of Lunches",
+        "author": "Don Jones",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 267,
+        "title": "Continuous Integration in .NET",
+        "author": "Marcin Kawalerowicz",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 268,
+        "title": "Technology Paradise Lost",
+        "author": "Erik Keller",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 277,
+        "title": "SQR in PeopleSoft and Other Applications",
+        "author": "Galina",
+        "stockQuantity": 1
+      },
+      {
+        "bookId": 297,
+        "title": "ASP.NET MVC 4 in Action",
+        "author": "Jeffrey Palermo",
+        "stockQuantity": 3
+      },
+      {
+        "bookId": 298,
+        "title": "EJB 3 in Action",
+        "author": "Debu Panda",
+        "stockQuantity": 2
+      },
+      {
+        "bookId": 305,
+        "title": "Machine Learning in Action",
+        "author": "Peter Harrington",
+        "stockQuantity": 4
+      },
+      {
+        "bookId": 320,
+        "title": "Java Applets and Channels Without Programming",
+        "author": "Ronny Richardson",
+        "stockQuantity": 2
+      }
+    ]
+  }
 }

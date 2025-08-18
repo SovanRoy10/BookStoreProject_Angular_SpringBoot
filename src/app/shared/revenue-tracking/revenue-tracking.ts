@@ -86,4 +86,21 @@ export class RevenueTracking implements OnInit {
       });
     });
   }
+
+    // handleAddToCart() {
+     
+  
+    //   this.cartService.addToCart().subscribe({
+    //     next: () => {
+    //       Swal.fire(
+    //         'Added!',
+    //         `${this.quantity} × "${this.book.title}" added to cart.`,
+    //         'success'
+    //       );
+    //     },
+    //     error: () => {
+    //       Swal.fire('Error!', 'Failed to add to cart.', 'error');
+    //     },
+    //   });
+    // }
 }

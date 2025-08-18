@@ -1,26 +1,167 @@
-{
-  "revenueByCategory": {
-    "Finance": 760,
-    "Biography": 15300,
-    "Philosophy": 3588,
-    "Fiction": 1230
+[
+  {
+    "title": "Unlocking Android",
+    "author": "W. Frank Ableson",
+    "price": 520,
+    "isbn": "1933988673",
+    "publishedDate": "04-01-2009",
+    "categoryName": "Open Source",
+    "stockQuantity": 31,
+    "description": "Android is an open source mobile phone platform based on the Linux operating system and developed by the Open Handset Alliance, a consortium of over 30 hardware, software and telecom companies that focus on open standards for mobile devices. Led by s...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson.jpg"
   },
-  "revenuePerBook": {
-    "Educated": 9000,
-    "Becoming": 6300,
-    "Ikigai": 3588,
-    "The Book Thief": 1230,
-    "Rich Dad Poor Dad": 760
+  {
+    "title": "Android in Action, Second Edition",
+    "author": "W. Frank Ableson",
+    "price": 350,
+    "isbn": "1935182722",
+    "publishedDate": "14-01-2011",
+    "categoryName": "Java",
+    "stockQuantity": 27,
+    "description": "When it comes to mobile apps, Android can do almost anything   and with this book, so can you! Android runs on mobile devices ranging from smart phones to tablets to countless special-purpose gadgets. It's the broadest mobile platform available.    A...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg"
   },
-  "revenueOverTime": {
-    "daily": {
-      "daily": 20878
-    },
-    "weekly": {
-      "weekly": 20878
-    },
-    "monthly": {
-      "monthly": 20878
-    }
+  {
+    "title": "Specification by Example",
+    "author": "Gojko Adzic",
+    "price": 730,
+    "isbn": "1617290084",
+    "publishedDate": "06-03-2011",
+    "categoryName": "Software Engineering",
+    "stockQuantity": 17,
+    "description": "nan...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/adzic.jpg"
+  },
+  {
+    "title": "Flex 3 in Action",
+    "author": "Tariq Ahmed with Jon Hirschi",
+    "price": 614,
+    "isbn": "1933988746",
+    "publishedDate": "02-02-2009",
+    "categoryName": "Internet",
+    "stockQuantity": 17,
+    "description": "New web applications require engaging user-friendly interfaces   and the cooler, the better. With Flex 3, web developers at any skill level can create high-quality, effective, and interactive Rich Internet Applications (RIAs) quickly and easily. Flex...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ahmed.jpg"
+  },
+  {
+    "title": "Flex 4 in Action",
+    "author": "Tariq Ahmed",
+    "price": 115,
+    "isbn": "1935182420",
+    "publishedDate": "15-11-2010",
+    "categoryName": "Internet",
+    "stockQuantity": 20,
+    "description": "Using Flex, you can create high-quality, effective, and interactive Rich Internet Applications (RIAs) quickly and easily. Flex removes the complexity barrier from RIA development by offering sophisticated tools and a straightforward programming langu...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ahmed2.jpg"
+  },
+  {
+    "title": "Collective Intelligence in Action",
+    "author": "Satnam Alag",
+    "price": 633,
+    "isbn": "1933988312",
+    "publishedDate": "10-01-2008",
+    "categoryName": "Internet",
+    "stockQuantity": 30,
+    "description": "There's a great deal of wisdom in a crowd, but how do you listen to a thousand people talking at once  Identifying the wants, needs, and knowledge of internet users can be like listening to a mob.    In the Web 2.0 era, leveraging the collective powe...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alag.jpg"
+  },
+  {
+    "title": "Zend Framework in Action",
+    "author": "Rob Allen",
+    "price": 716,
+    "isbn": "1933988320",
+    "publishedDate": "12-01-2008",
+    "categoryName": "Web Development",
+    "stockQuantity": 31,
+    "description": "From rather humble beginnings as the Personal Home Page scripting language, PHP has found its way into almost every server, corporation, and dev shop in the world. On an average day, somewhere between 500,000 and 2 million coders do something in PHP....",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/allen.jpg"
+  },
+  {
+    "title": "Flex on Java",
+    "author": "Bernerd Allmon",
+    "price": 327,
+    "isbn": "1933988797",
+    "publishedDate": "15-10-2010",
+    "categoryName": "Internet",
+    "stockQuantity": 33,
+    "description": "In the demo, a hip designer, a sharply-dressed marketer, and a smiling, relaxed developer sip lattes and calmly discuss how Flex is going to make customers happy and shorten the workday   all while boosting the bottom line. The software systems they'...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/allmon.jpg"
+  },
+  {
+    "title": "Griffon in Action",
+    "author": "Andres Almiray",
+    "price": 462,
+    "isbn": "1935182234",
+    "publishedDate": "06-04-2012",
+    "categoryName": "Java",
+    "stockQuantity": 20,
+    "description": "Although several options exist for interface development in Java, even popular UI toolkits like Swing have been notoriously complex and difficult to use. Griffon, an agile framework that uses Groovy to simplify Swing, makes UI development dramaticall...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/almiray.jpg"
+  },
+  {
+    "title": "OSGi in Depth",
+    "author": "Alexandre de Castro Alves",
+    "price": 643,
+    "isbn": "193518217X",
+    "publishedDate": "12-12-2011",
+    "categoryName": "Java",
+    "stockQuantity": 12,
+    "description": "A good application framework greatly simplifies a developer's task by providing reusable code modules that solve common, tedious, or complex tasks. Writing a great framework requires an extraordinary set of skills-ranging from deep knowledge of a pro...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/alves.jpg"
+  },
+  {
+    "title": "Flexible Rails",
+    "author": "Peter Armstrong",
+    "price": 702,
+    "isbn": "1933988509",
+    "publishedDate": "01-01-2008",
+    "categoryName": "Web Development",
+    "stockQuantity": 19,
+    "description": "Rails is a fantastic tool for web application development, but its Ajax-driven interfaces stop short of the richness you gain with a tool like Adobe Flex. Simply put, Flex is the most productive way to build the UI of rich Internet applications, and ...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/armstrong.jpg"
+  },
+  {
+    "title": "Hello! Flex 4",
+    "author": "Peter Armstrong",
+    "price": 374,
+    "isbn": "1933988762",
+    "publishedDate": "11-01-2009",
+    "categoryName": "Internet",
+    "stockQuantity": 50,
+    "description": "With Flex 4 you can easily add color and life to your web applications by introducing dynamic user features, slick transitions, and eye-catching animations. Flex also provides powerful data handling capabilities so you can build industrial-strength a...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/armstrong3.jpg"
+  },
+  {
+    "title": "Coffeehouse",
+    "author": "Levi Asher",
+    "price": 882,
+    "isbn": "1884777384",
+    "publishedDate": "07-01-1997",
+    "categoryName": "Miscellaneous",
+    "stockQuantity": 23,
+    "description": "Coffeehouse is an anthology of stories, poems and essays originally published on the World Wide Web. The purpose is to capture the zeitgeist of the web's creative community, and to give readers a chance to enjoy some of the best and most notable orig...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/asher.jpg"
+  },
+  {
+    "title": "Team Foundation Server 2008 in Action",
+    "author": "Jamil Azher",
+    "price": 972,
+    "isbn": "1933988592",
+    "publishedDate": "12-01-2008",
+    "categoryName": "Microsoft .NET",
+    "stockQuantity": 19,
+    "description": "In complex software projects, managing the development process can be as critical to success as writing the code itself. A project may involve dozens of developers, managers, architects, testers, and customers, hundreds of builds, and thousands of op...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/azher.jpg"
+  },
+  {
+    "title": "Brownfield Application Development in .NET",
+    "author": "Kyle Baley",
+    "price": 334,
+    "isbn": "1933988711",
+    "publishedDate": "16-04-2010",
+    "categoryName": "Microsoft",
+    "stockQuantity": 37,
+    "description": "It's easy to get excited about building a new software project from scratch. So-called greenfield projects often involve learning new technology and the opportunity for experimentation. Working on established software projects may seem less glamoro...",
+    "coverImageUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/baley.jpg"
   }
-}
+]

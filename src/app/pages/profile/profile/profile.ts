@@ -34,7 +34,7 @@ export class Profile implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     private authService: Auth, // ✅ inject Auth
-    private router: Router // ✅ inject Router
+    private router: Router 
   ) {}
 
   ngOnInit() {

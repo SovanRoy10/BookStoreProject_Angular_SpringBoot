@@ -24,7 +24,8 @@ export class BookService {
   // GET all books
   getAllBooks(): Observable<any> {
     // return this.http.get(`${this.apiUrl}/categories/get-all`);
-    return this.http.get(`https://dummyjson.com/c/05eb-5a96-415c-81ed`);
+    // return this.http.get(`https://dummyjson.com/c/05eb-5a96-415c-81ed`);
+    return this.http.get(`https://dummyjson.com/c/1ec3-9bbe-4034-8a0d`);
   }
 
   // GET book by ID
@@ -40,7 +41,8 @@ export class BookService {
 
   // GET trending books
   getTrendingBooks(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/trending`);
+    // return this.http.get(`${this.apiUrl}/trending`);
+    return this.http.get(`https://dummyjson.com/c/ba4e-d693-452b-83ab`);
   }
 
   // PUT update book
